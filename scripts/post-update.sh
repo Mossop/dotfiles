@@ -2,9 +2,7 @@
 
 set -e
 
-. "$DOTFILES/includes/config.sh"
-
-write_config
+. "$DOTFILES/scripts/write-config.sh"
 
 rm -f "$TMPFILE"
 exec "$DOTFILES/install"

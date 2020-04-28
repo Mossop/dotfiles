@@ -2,8 +2,6 @@
 
 set -e
 
-. "$DOTFILES/includes/config.sh"
-
-write_config
+. "$DOTFILES/scripts/write-config.sh"
 
 exec "$DOTFILES/install"
