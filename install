@@ -26,8 +26,8 @@ echo "source \"$DOTFILES/scripts/startup.sh\" # $GREPTERM" >> "$HOME/.profile"
 install_files "$DOTFILES/home" "$HOME"
 install_files "$PLATFORM_DIR/home" "$HOME"
 
-pull_git_repo "https://github.com/pyenv/pyenv.git" "$DOTFILES/external/pyenv"
 if [ -d "$DOTFILES/external/pyenv" ]; then
+  pull_git_repo "https://github.com/pyenv/pyenv.git" "$DOTFILES/external/pyenv"
   pull_git_repo https://github.com/pyenv/pyenv-virtualenv.git "$DOTFILES/external/pyenv/plugins/pyenv-virtualenv"
 fi
 
