@@ -1,5 +1,3 @@
-set -e
-
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
 
 . "$DOTFILES/includes/functions.sh"
@@ -34,14 +32,14 @@ typeset -fx virtualenv_info
 
 VENV="\$(virtualenv_info)";
 
-CFG_HOST=$(hostname | cut -d"." -f1 | tr '[:upper:]' '[:lower:]')
+HOSTNAME=$(hostname | cut -d"." -f1 | tr '[:upper:]' '[:lower:]')
 if [ "$DOTFILES_PLATFORM" == "windows" ]; then
-  CFG_NAMEPROMPT="${CFG_HOST}"
+  NAMEPROMPT="${HOSTNAME}"
 else
-  CFG_NAMEPROMPT="\\u@${CFG_HOST}"
+  NAMEPROMPT="\\u@${HOSTNAME}"
 fi
 
-export PROMPT_START="\\[\\033]0;${CFG_NAMEPROMPT}\\007\\033[1;32m\\]${CFG_NAMEPROMPT}\\[\\033[0m\\]${VENV}"
+export PROMPT_START="\\[\\033]0;${NAMEPROMPT}\\007\\033[1;32m\\]${NAMEPROMPT}\\[\\033[0m\\]${VENV}"
 export PROMPT_END="\\n\\[\\033[1;34m\\]\\W\\[\\033[0m\\]\\$ "
 
 export PS1="${PROMPT_START}${PROMPT_END}"
