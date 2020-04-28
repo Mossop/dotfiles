@@ -28,7 +28,7 @@ else
   rm -f "$HOME/.bashrc.bak"
 fi
 
-echo "source \"$DOTFILES/scripts/startup.sh\" # $GREPTERM" >> "$HOME/.profile"
+echo "source \"$DOTFILES/scripts/profile.sh\" # $GREPTERM" >> "$HOME/.profile"
 echo "source \"$DOTFILES/scripts/startup.sh\" # $GREPTERM" >> "$HOME/.bashrc"
 
 install_files "$DOTFILES/home" "$HOME"
