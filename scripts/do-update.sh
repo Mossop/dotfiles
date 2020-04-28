@@ -13,7 +13,7 @@ else
   fi
 
   if command -v mktemp 1>/dev/null 2>&1; then
-    tmpdir=$(mktemp -d dotfiles-update.XXXXXX)
+    tmpdir=$(mktemp -d)
   elif [ -n "$TMPDIR" ]; then
     tmpdir="$TMPDIR/dotfiles-update-dir"
   elif [ -n "$TEMP" ]; then
