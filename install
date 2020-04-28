@@ -1,0 +1,24 @@
+#! /bin/bash
+
+set -e
+
+DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && pwd | sed -e s/\\/$//g)
+
+. "$DOTFILES/includes/functions.sh"
+. "$DOTFILES/includes/config.sh"
+
+echo "Installing..."
+
+#
+# Install the startup script.
+#
+GREPTERM="dotfiles-init"
+
+if [ ! -f "$HOME/.profile" ]; then
+  touch "$HOME/profile"
+else
+  sed -i.bak "/$GREPTERM/d" "$HOME/.profile"
+  rm -f "$HOME/.profile.bak"
+fi
+
+echo "source '$DOTFILES/scripts/startup.sh' # $GREPTERM" >> "$HOME/.profile"

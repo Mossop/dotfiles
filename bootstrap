@@ -2,40 +2,36 @@
 
 set -e
 
-REPO="Mossop/dotfiles"
-DOTFILES="$HOME/dotfiles"
-SOURCE="https://github.com/Mossop/dotfiles/archive/master.tar.gz"
+# These are passed on to post-bootstrap.sh
+export DOTFILES_REPO="Mossop/dotfiles"
+export DOTFILES_BRANCH="master"
+export DOTFILES="$HOME/dotfiles"
 
 if [ -d "$DOTFILES" ]; then
   echo "$DOTFILES already exists."
-  if [ -x "$DOTFILES/install.sh" ]; then
-    exec "$DOTFILES/install.sh"
-  fi
   exit 0
 fi
 
 if command -v git 1>/dev/null 2>&1; then
-  git clone "https://github.com/${REPO}.git" $DOTFILES
-  exec "$DOTFILES/install.sh"
+  git clone -b $$DOTFILES_BRANCH "https://github.com/${DOTFILES_REPO}.git" "$DOTFILES"
+else
+  echo "Git is not installed. Falling back to an archive install."
+
+  if ! command -v tar 1>/dev/null 2>&1; then
+    echo "tar is not installed, cannot proceed."
+    exit 1
+  fi
+
+  if command -v curl 1>/dev/null 2>&1; then
+    mkdir -p "$DOTFILES"
+    curl -sL "https://github.com/${DOTFILES_REPO}/archive/${$DOTFILES_BRANCH}.tar.gz" | tar -xpz -C "$DOTFILES" --strip-components=1
+  elif command -v wget 1>/dev/null 2>&1; then
+    mkdir -p "$DOTFILES"
+    wget --quiet -O - "https://github.com/${DOTFILES_REPO}/archive/${$DOTFILES_BRANCH}.tar.gz" | tar -xpz -C "$DOTFILES" --strip-components=1
+  else
+    echo "Neither curl nor wget are available, cannot proceed."
+    exit 1
+  fi
 fi
 
-echo "Git is not installed. Falling back to an archive install."
-
-if ! command -v tar 1>/dev/null 2>&1; then
-  echo "tar is not installed, cannot proceed."
-  exit 1
-fi
-
-if command -v curl 1>/dev/null 2>&1; then
-  mkdir -p $DOTFILES
-  curl -sL "https://github.com/${REPO}/archive/master.tar.gz" | tar -xz -C $DOTFILES --strip-components=1
-  exec "$DOTFILES/install.sh"
-fi
-
-if command -v wget 1>/dev/null 2>&1; then
-  mkdir -p $DOTFILES
-  wget --quiet -O - "https://github.com/${REPO}/archive/master.tar.gz" | tar -xz -C $DOTFILES --strip-components=1
-  exec "$DOTFILES/install.sh"
-fi
-
-echo "Neither curl nor wget are available, cannot proceed."
+exec "$DOTFILES/scripts/post-bootstrap.sh"

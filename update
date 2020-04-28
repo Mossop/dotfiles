@@ -1,0 +1,27 @@
+#! /bin/bash
+
+set -e
+
+export DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && pwd | sed -e s/\\/$//g)
+
+# Copy the actual update script somewhere safe so if the update process modifies
+# it nothing nasty happens.
+
+if command -v mktemp 1>/dev/null 2>&1; then
+  TMPFILE=$(mktemp dotfiles-update.XXXXXX)
+elif [ -n "$TMPDIR" ]; then
+  TMPFILE="$TMPDIR/dotfiles-update-script"
+elif [ -n "$TEMP" ]; then
+  TMPFILE="$TEMP/dotfiles-update-script"
+elif [ -n "$TMP" ]; then
+  TMPFILE="$TMP/dotfiles-update-script"
+else
+  echo "Could not find a temporary directory."
+  exit 1
+fi
+
+cat "$DOTFILES/scripts/do-update.sh" > "$TMPFILE"
+chmod ugo+x "$TMPFILE"
+
+export TMPFILE
+exec "$TMPFILE"
