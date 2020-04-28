@@ -20,6 +20,7 @@ alias ls="ls --color"
 
 export LESS="FRSX"
 unset HISTFILE
+unset MAILCHECK
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 

@@ -34,6 +34,16 @@ request() {
   fi
 }
 
+update_hg_repo() {
+  TARGET="$1"
+
+  if command -v hg 1>/dev/null 2>&1; then
+    if [ -d "$TARGET" ]; then
+      hg -q -R "$TARGET" pull -u
+    fi
+  fi
+}
+
 pull_hg_repo() {
   REPO="$1"
   TARGET="$2"
@@ -43,6 +53,16 @@ pull_hg_repo() {
       hg -q -R "$TARGET" pull -u
     else
       hg -q clone "$REPO" "$TARGET"
+    fi
+  fi
+}
+
+update_git_repo() {
+  TARGET="$1"
+
+  if command -v git 1>/dev/null 2>&1; then
+    if [ -d "$TARGET" ]; then
+      git -C "$TARGET" pull -q origin master
     fi
   fi
 }
