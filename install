@@ -21,4 +21,4 @@ else
   rm -f "$HOME/.profile.bak"
 fi
 
-echo "source '$DOTFILES/scripts/startup.sh' # $GREPTERM" >> "$HOME/.profile"
+echo "source \"$DOTFILES/scripts/startup.sh\" # $GREPTERM" >> "$HOME/.profile"

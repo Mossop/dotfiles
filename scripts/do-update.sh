@@ -28,9 +28,9 @@ else
   mkdir -p "$tmpdir"
 
   if command -v curl 1>/dev/null 2>&1; then
-    curl -sL "https://github.com/${REPO}/archive/$DOTFILES_BRANCH.tar.gz" | tar -xpz -C "$tmpdir" --strip-components=1
+    curl -sL "https://github.com/${DOTFILES_REPO}/archive/$DOTFILES_BRANCH.tar.gz" | tar -xpz -C "$tmpdir" --strip-components=1
   elif command -v wget 1>/dev/null 2>&1; then
-    wget --quiet -O - "https://github.com/${REPO}/archive/$DOTFILES_BRANCH.tar.gz" | tar -xpz -C "$tmpdir" --strip-components=1
+    wget --quiet -O - "https://github.com/${DOTFILES_REPO}/archive/$DOTFILES_BRANCH.tar.gz" | tar -xpz -C "$tmpdir" --strip-components=1
   else
     echo "Neither curl nor wget are available, cannot proceed."
     exit 1
