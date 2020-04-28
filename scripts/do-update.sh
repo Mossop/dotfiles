@@ -38,8 +38,8 @@ else
 
   for f in $(cd "$DOTFILES" && ls -A)
   do
-    if [ "$f" -ne ".config" ]; then
-      echo rm -rf "$DOTFILES/$f"
+    if [ "$f" != ".config" ]; then
+      rm -rf "$DOTFILES/$f"
     fi
   done
 
