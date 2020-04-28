@@ -4,8 +4,6 @@ set -e
 
 . "$DOTFILES/includes/config.sh"
 
-load_config()
-
 if [ -d "$DOTFILES/.git" ]; then
   if [ -f "$HOME/.ssh/id_rsa_github" ]; then
     git -C "$DOTFILES" remote set-url origin "git@github.com:${DOTFILES_REPO}.git"
