@@ -1,6 +1,6 @@
 install_files() {
-  SOURCE="$1"
-  TARGET="$2"
+  local SOURCE="$1"
+  local TARGET="$2"
 
   if [ -d "$SOURCE" ]; then
     mkdir -p "$TARGET"
@@ -9,21 +9,24 @@ install_files() {
 }
 
 maybe_source() {
-  SCRIPT="$1"
+  local SCRIPT="$1"
+
   if [ -f "$SCRIPT" ]; then
     . "$SCRIPT"
   fi
 }
 
 add_path() {
-  DIR="$1"
+  local DIR="$1"
+
   if [ -d "$DIR" ]; then
     PATH="$DIR:$PATH"
   fi
 }
 
 request() {
-  URL=$1
+  local URL=$1
+
   if command -v curl 1>/dev/null 2>&1; then
     curl -sL "$URL"
   elif command -v wget 1>/dev/null 2>&1; then
@@ -35,7 +38,7 @@ request() {
 }
 
 update_hg_repo() {
-  TARGET="$1"
+  local TARGET="$1"
 
   if command -v hg 1>/dev/null 2>&1; then
     if [ -d "$TARGET" ]; then
@@ -45,8 +48,8 @@ update_hg_repo() {
 }
 
 pull_hg_repo() {
-  REPO="$1"
-  TARGET="$2"
+  local REPO="$1"
+  local TARGET="$2"
 
   if command -v hg 1>/dev/null 2>&1; then
     if [ -d "$TARGET" ]; then
@@ -58,7 +61,7 @@ pull_hg_repo() {
 }
 
 update_git_repo() {
-  TARGET="$1"
+  local TARGET="$1"
 
   if command -v git 1>/dev/null 2>&1; then
     if [ -d "$TARGET" ]; then
@@ -68,8 +71,8 @@ update_git_repo() {
 }
 
 pull_git_repo() {
-  REPO="$1"
-  TARGET="$2"
+  local REPO="$1"
+  local TARGET="$2"
 
   if command -v git 1>/dev/null 2>&1; then
     if [ -d "$TARGET" ]; then
@@ -78,6 +81,23 @@ pull_git_repo() {
       git clone -q "$REPO" "$TARGET"
     fi
   fi
+}
+
+clean_up() {
+  unset install_files
+  unset maybe_source
+  unset add_path
+  unset request
+  unset update_hg_repo
+  unset pull_hg_repo
+  unset update_git_repo
+  unset pull_git_repo
+  unset DOTFILES
+  unset DOTFILES_PLATFORM
+  unset PLATFORM_DIR
+  unset DOTFILES_REPO
+  unset DOTFILES_BRANCH
+  unset export_config
 }
 
 if [[ ${OSTYPE:0:5} == "linux" ]]; then

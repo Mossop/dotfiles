@@ -1,20 +1,11 @@
-if [ -n "$DOTFILES_SOURCED" ]; then
-  return
+if [ -z "$DOTFILES_BASHRC_SOURCED" ]; then
+  . $(dirname "${BASH_SOURCE[0]:-$0}")/bashrc.sh
 fi
 
-export DOTFILES_SOURCED=1
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
 
 . "$DOTFILES/includes/functions.sh"
 . "$DOTFILES/includes/config.sh"
-
-add_path "$HOME/bin"
-add_path "$DOTFILES/bin"
-add_path "$PLATFORM_DIR/bin"
-
-if [ -f "$HOME/.cargo/env" ]; then
-  . "$HOME/.cargo/env"
-fi
 
 if command -v dircolors 1>/dev/null 2>&1; then
   eval $(dircolors "$DOTFILES/shared/dircolors")
@@ -58,3 +49,5 @@ if [ -d "$DOTFILES/external/pyenv" ]; then
 fi
 
 maybe_source "$PLATFORM_DIR/startup.sh"
+
+clean_up
