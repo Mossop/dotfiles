@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+NAME="Code"
+VSCODE_PATH="/c/Users/Dave/AppData/Local/Programs/Microsoft VS Code"
+ELECTRON="$VSCODE_PATH/$NAME.exe"
+CLI="$VSCODE_PATH/resources/app/out/cli.js"
+
+ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@"
+exit $?

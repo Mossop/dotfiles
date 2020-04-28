@@ -6,19 +6,19 @@ set -e
 
 if [ -d "$DOTFILES/.git" ]; then
   if [ -f "$HOME/.ssh/id_rsa_github" ]; then
-    git remote set-url origin "git@github.com:${DOTFILES_REPO}.git"
+    git -C "$DOTFILES" remote set-url origin "git@github.com:${DOTFILES_REPO}.git"
   fi
-  git -C "$DOTFILES" pull origin $DOTFILES_BRANCH
+  git -C "$DOTFILES" pull -q origin $DOTFILES_BRANCH
 elif command -v git 1>/dev/null 2>&1; then
   if [ -f "$HOME/.ssh/id_rsa_github" ]; then
-    git clone --bare -b $DOTFILES_BRANCH "git@github.com:${DOTFILES_REPO}.git" "$DOTFILES/.git"
+    git clone -q --bare -b $DOTFILES_BRANCH "git@github.com:${DOTFILES_REPO}.git" "$DOTFILES/.git"
   else
-    git clone --bare -b $DOTFILES_BRANCH "https://github.com/${DOTFILES_REPO}.git" "$DOTFILES/.git"
+    git clone -q --bare -b $DOTFILES_BRANCH "https://github.com/${DOTFILES_REPO}.git" "$DOTFILES/.git"
   fi
   sed -i.bak "/bare =/d" "$DOTFILES/.git/config"
   rm -f "$DOTFILES/.git/config.bak"
-  git -C "$DOTFILES" checkout -f $DOTFILES_BRANCH
-  git -C "$DOTFILES" reset --hard $DOTFILES_BRANCH
+  git -C "$DOTFILES" checkout -q -f $DOTFILES_BRANCH
+  git -C "$DOTFILES" reset -q --hard $DOTFILES_BRANCH
 else
   if ! command -v tar 1>/dev/null 2>&1; then
     echo "tar is not installed, cannot proceed."
@@ -51,12 +51,12 @@ else
 
   for f in $(cd "$DOTFILES" && ls -A)
   do
-    if [ "$f" != ".config" ]; then
+    if [ "$f" != "external" ]; then
       rm -rf "$DOTFILES/$f"
     fi
   done
 
-  tar -cp -C $(dirname "$tmpdir") $(basename "$tmpdir") | tar -xp -C "$DOTFILES" --strip-components=1
+  tar -cp -C "$tmpdir" . | tar -xp -C "$DOTFILES"
   rm -rf "$tmpdir"
 fi
 

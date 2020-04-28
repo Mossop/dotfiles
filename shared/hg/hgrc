@@ -1,0 +1,82 @@
+[ui]
+merge = internal:merge
+username = Dave Townsend <dtownsend@oxymoronical.com>
+ignore = ~/dotfiles/shared/hg/hgignore
+tweakdefaults = true
+
+[diff]
+unified = 8
+
+[defaults]
+outgoing = --stat
+evolve = --update
+
+[extensions]
+graphlog =
+transplant =
+extdiff =
+progress =
+relink =
+purge =
+rebase =
+histedit =
+evolve =
+show =
+absorb =
+blackbox =
+
+[alias]
+patch = up --rev "patch($1)"
+patches = log --rev patches --style ~/dotfiles/shared/hg/wip
+blog = log --graph --rev "fullbranch($1) + bparent($1)" --style ~/dotfiles/shared/hg/branch
+bdiff = diff --rev "bparent($1)" --rev $1
+bstatus = status --rev "bparent($1)" --rev $1
+rdiff = diff --rev "$1^" --rev "$1"
+rstatus = status --rev "$1^" --rev "$1"
+smart-annotate = annotate -w --skip ignored_changesets
+unresolved = !$HG resolve -l "set:unresolved()" -T "{reporoot}/{path}\0" | xargs -0 $EDITOR
+rgrep = !$HG rstatus "$1" -man0 | xargs -0 rg $2
+
+[revsetalias]
+patches = sort(head() and draft() and not desc("(abandoned)"), "desc")
+patch($1) = last(first(patches, $1))
+bbase($1) = roots(ancestors($1) and draft())
+bparent($1) = parents(bbase($1))
+branch($1) = (descendants(bbase($1)) and draft())
+fullbranch($1) = branch($1) + descendants(allprecursors(branch($1)))
+ignored_changesets = desc("ignore-this-changeset") or extdata(get_ignored_changesets)
+
+[color]
+mode = terminfo
+color.brightred = 9
+color.brightblack = 8
+color.brightwhite = 15
+log.active = blue_background
+log.identifier = yellow
+log.user = green
+log.bookmark = cyan
+log.branch = cyan
+log.tag = cyan
+log.fxtree = cyan
+log.instabilities = red
+log.description = brightblack
+log.unstable = red_background
+log.patchid = brightred
+description.draft = brightwhite
+log.obsolete = brightblack
+log.review = red
+
+[pager]
+pager = less
+
+[subrepos]
+git:allowed = true
+
+[histedit]
+linelen = 200
+
+[extdata]
+get_ignored_changesets = shell:cat `hg root`/.hg-annotate-ignore-revs 2> /dev/null || true
+
+[rebase]
+experimental.inmemory = True

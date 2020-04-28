@@ -1,0 +1,1 @@
+{label("log.identifier", pad(if(bookmarks, "{word(0, bookmarks)}", "{node|short}"), 12))} {label("log.user", author|user)}

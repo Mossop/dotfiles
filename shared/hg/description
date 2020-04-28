@@ -1,0 +1,1 @@
+{label("log.description{ifcontains(rev, revset("."), " log.active")}{if(instabilities, " log.unstable")} description.{phase}{if(obsolete, " log.obsolete")}", desc|firstline)}{if(instabilities, " {label("log.instabilities", instabilities)}")}

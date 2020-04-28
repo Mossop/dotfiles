@@ -1,0 +1,4 @@
+%include ~/dotfiles/shared/hg/hgrc
+
+[web]
+cacerts = /etc/ssl/certs/ca-certificates.crt

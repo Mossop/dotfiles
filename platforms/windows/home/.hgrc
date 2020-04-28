@@ -1,0 +1,11 @@
+%include ~/dotfiles/shared/hg/hgrc
+
+[ui]
+slash = true
+
+[color]
+mode = win32
+log.description = white
+description.draft = white
+log.obsolete = white
+log.patchid = red_background

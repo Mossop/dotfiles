@@ -1,0 +1,1 @@
+{label("log.branch", ifeq(branch, "default", "", " {branch}"))}{label("log.tag", if(tags, " {tags}"))}{label("log.fxtree", if(fxtrees," {fxtrees}"))}{label("log.bookmark", if(bookmarks," {bookmarks}"))}{label("log.review", if(phabreview, " {phabreview.id}"))}

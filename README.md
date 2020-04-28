@@ -35,10 +35,12 @@ The actual updating is performed by [`scripts/do-update.sh`](https://github.com/
 which is copied to a temporary location before being executed in case the update
 process modifies that file.
 
-The update process attempts to use `git` to update the repository. If dotfiles
-was not installed with git then it downloads the current archive of dotfiles and
-extracts it to a temporary directory. The current dotfiles directory is wiped
-excluding the `.config` file and then the new files are copied into place.
+The update process attempts to use `git` to update the repository. This includes
+attempting to convert the current dotfiles directory into a git repository if
+git is available. If git is not available then it downloads the current archive
+of dotfiles and extracts it to a temporary directory. The current dotfiles
+directory is wiped excluding the `.config` file and then the new files are copied
+into place.
 
 Afterwards [`scripts/post-update.sh`](https://github.com/Mossop/dotfiles/blob/master/scripts/post-update.sh)
 is executed which removes the temporary update script and then executes
