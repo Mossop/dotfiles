@@ -15,13 +15,21 @@ echo "Installing..."
 GREPTERM="dotfiles-init"
 
 if [ ! -f "$HOME/.profile" ]; then
-  touch "$HOME/profile"
+  touch "$HOME/.profile"
 else
   sed -i.bak "/$GREPTERM/d" "$HOME/.profile"
   rm -f "$HOME/.profile.bak"
 fi
 
+if [ ! -f "$HOME/.bashrc" ]; then
+  touch "$HOME/.bashrc"
+else
+  sed -i.bak "/$GREPTERM/d" "$HOME/.bashrc"
+  rm -f "$HOME/.bashrc.bak"
+fi
+
 echo "source \"$DOTFILES/scripts/startup.sh\" # $GREPTERM" >> "$HOME/.profile"
+echo "source \"$DOTFILES/scripts/startup.sh\" # $GREPTERM" >> "$HOME/.bashrc"
 
 install_files "$DOTFILES/home" "$HOME"
 install_files "$PLATFORM_DIR/home" "$HOME"

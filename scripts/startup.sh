@@ -1,3 +1,8 @@
+if [ -n "$DOTFILES_SOURCED" ]; then
+  return
+fi
+
+export DOTFILES_SOURCED=1
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
 
 . "$DOTFILES/includes/functions.sh"
