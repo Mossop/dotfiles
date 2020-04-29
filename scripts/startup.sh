@@ -7,6 +7,14 @@ DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$
 . "$DOTFILES/includes/functions.sh"
 . "$DOTFILES/includes/config.sh"
 
+add_path "$HOME/bin"
+add_path "$DOTFILES/bin"
+add_path "$PLATFORM_DIR/bin"
+
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+
 if command -v dircolors 1>/dev/null 2>&1; then
   eval $(dircolors "$DOTFILES/shared/dircolors")
 fi

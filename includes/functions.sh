@@ -20,7 +20,19 @@ add_path() {
   local DIR="$1"
 
   if [ -d "$DIR" ]; then
+    local _IFS=$IFS
+    IFS=":"
+
+    for p in $PATH
+    do
+      if [ "$p" = "$DIR" ]; then
+        IFS=$_IFS
+        return
+      fi
+    done
+
     PATH="$DIR:$PATH"
+    IFS=$_IFS
   fi
 }
 
@@ -92,12 +104,8 @@ clean_up() {
   unset pull_hg_repo
   unset update_git_repo
   unset pull_git_repo
-  unset DOTFILES
-  unset DOTFILES_PLATFORM
-  unset PLATFORM_DIR
-  unset DOTFILES_REPO
-  unset DOTFILES_BRANCH
   unset export_config
+  unset clean_up
 }
 
 if [[ ${OSTYPE:0:5} == "linux" ]]; then
