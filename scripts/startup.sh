@@ -8,6 +8,7 @@ DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$
 . "$DOTFILES/includes/config.sh"
 
 add_path "$HOME/bin"
+add_path "$HOME/.local/bin"
 add_path "$DOTFILES/bin"
 add_path "$PLATFORM_DIR/bin"
 
