@@ -17,23 +17,43 @@ maybe_source() {
 }
 
 add_path() {
-  local DIR="$1"
+  local dir="$1"
 
-  if [ -d "$DIR" ]; then
-    local _IFS=$IFS
-    IFS=":"
-
-    for p in $PATH
-    do
-      if [ "$p" = "$DIR" ]; then
-        IFS=$_IFS
-        return
-      fi
-    done
-
-    PATH="$DIR:$PATH"
-    IFS=$_IFS
+  if [ -d "$dir" ]; then
+    PATH="$dir:$PATH"
   fi
+}
+
+clean_path() {
+  PATH=$(echo $PATH | tr ':' '\n' | awk '!seen[$0]++' - | sed -z '$ s/\n$//' | tr '\n' ':')
+}
+
+link_directory() {
+  local directory="$1"
+  local link="$2"
+
+  if [ -e "$directory" -a ! -d "$directory" ]; then
+    echo "$directory is not a directory."
+    exit 1
+  fi
+
+  if [ -h "$link" ]; then
+    target=$(readlink "$link")
+    if [ "$target" != "$directory" ]; then
+      rm "$link"
+    else
+      mkdir -p "$directory"
+      return
+    fi
+  elif [ -d "$link" -a ! -e "$directory" ]; then
+    mv "$link" "$directory"
+  elif [ -e "$link" ]; then
+    echo "Something already exists at $link."
+    exit 1
+  fi
+
+  mkdir -p "$directory"
+  ln -s "$directory" "$link"
 }
 
 request() {
@@ -105,6 +125,7 @@ clean_up() {
   unset update_git_repo
   unset pull_git_repo
   unset export_config
+  unset clean_path
   unset clean_up
 }
 

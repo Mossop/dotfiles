@@ -51,7 +51,7 @@ export PS1="${PROMPT_START}${PROMPT_END}"
 
 if [ -d "$DOTFILES/external/pyenv" ]; then
   export PYENV_ROOT="$DOTFILES/external/pyenv"
-  add_path "$PYENV_ROOT/bin"
+  add_path "$DOTFILES/external/pyenv/bin"
 
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
@@ -59,4 +59,5 @@ fi
 
 maybe_source "$PLATFORM_DIR/startup.sh"
 
+clean_path
 clean_up

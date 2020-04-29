@@ -8,3 +8,7 @@ DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$
 . "$DOTFILES/includes/config.sh"
 
 pull_git_repo "https://github.com/pyenv/pyenv.git" "$DOTFILES/external/pyenv"
+pull_git_repo "https://github.com/pyenv/pyenv-virtualenv.git" "$DOTFILES/external/pyenv/plugins/pyenv-virtualenv"
+
+link_directory "$HOME/.pyenv/shims" "$DOTFILES/external/pyenv/shims"
+link_directory "$HOME/.pyenv/versions" "$DOTFILES/external/pyenv/versions"
