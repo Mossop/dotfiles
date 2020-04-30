@@ -13,11 +13,7 @@ if [ -d "$DOTFILES" ]; then
 fi
 
 if command -v git 1>/dev/null 2>&1; then
-  if [ -f "$HOME/.ssh/id_rsa_github" ]; then
-    git clone -q -b $DOTFILES_BRANCH "git@github.com:${DOTFILES_REPO}.git" "$DOTFILES"
-  else
-    git clone -q -b $DOTFILES_BRANCH "https://github.com/${DOTFILES_REPO}.git" "$DOTFILES"
-  fi
+  git clone -q -b $DOTFILES_BRANCH "https://github.com/${DOTFILES_REPO}.git" "$DOTFILES"
 else
   echo "Git is not installed. Falling back to an archive install."
 

@@ -7,6 +7,10 @@ set -e
 if [ -d "$DOTFILES/.git" ]; then
   if [ -f "$HOME/.ssh/id_rsa_github" ]; then
     git -C "$DOTFILES" remote set-url origin "git@github.com:${DOTFILES_REPO}.git"
+  elif [ -n "$SSH_AUTH_SOCK" ]; then
+    if ssh-add -l | grep -q id_rsa_github 1>/dev/null 2>&1; then
+      git -C "$DOTFILES" remote set-url origin "git@github.com:${DOTFILES_REPO}.git"
+    fi
   fi
   git -C "$DOTFILES" pull -q origin $DOTFILES_BRANCH
 elif command -v git 1>/dev/null 2>&1; then
