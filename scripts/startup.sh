@@ -66,7 +66,7 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 fi
 
 if [ -n "$SSH_AUTH_SOCK" -a -d "$HOME/.ssh" ]; then
-  grep -l "PRIVATE KEY-----" "$HOME/.ssh/"* | xargs ssh-add -q
+  grep -l "PRIVATE KEY-----" "$HOME/.ssh/"* | xargs -r ssh-add -q
 fi
 
 clean_path
