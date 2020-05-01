@@ -1,6 +1,5 @@
 if [ -d "/c/Users/Dave/AppData/Local/Programs/Microsoft VS Code" ]; then
-  export EDITOR="code -w"
-  export VISUAL="code -w"
+  alias code=vscode
 fi
 
 if [ -x "/c/mozilla/bin/startup" ]; then

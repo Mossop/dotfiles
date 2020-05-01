@@ -59,6 +59,18 @@ fi
 
 maybe_source "$PLATFORM_DIR/startup.sh"
 
+if command -v code-insiders 1>/dev/null 2>&1; then
+  alias code=code-insiders
+fi
+
+if command -v code 1>/dev/null 2>&1; then
+  export EDITOR="code -w"
+  export VISUAL="code -w"
+elif command -v joe 1>/dev/null 2>&1; then
+  export EDITOR=joe
+  export VISUAL=joe
+fi
+
 if [ -z "$SSH_AUTH_SOCK" ]; then
   if command -v ssh-agent 1>/dev/null 2>&1; then
     eval $(ssh-agent)
