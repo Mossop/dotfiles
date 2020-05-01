@@ -61,9 +61,9 @@ maybe_source "$PLATFORM_DIR/startup.sh"
 
 if command -v code-insiders 1>/dev/null 2>&1; then
   alias code=code-insiders
-fi
-
-if command -v code 1>/dev/null 2>&1; then
+  export EDITOR="code-insiders -w"
+  export VISUAL="code-insiders -w"
+elif command -v code 1>/dev/null 2>&1; then
   export EDITOR="code -w"
   export VISUAL="code -w"
 elif command -v joe 1>/dev/null 2>&1; then
