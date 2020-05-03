@@ -59,6 +59,18 @@ fi
 
 maybe_source "$PLATFORM_DIR/startup.sh"
 
+if command -v code-insiders 1>/dev/null 2>&1; then
+  alias code=code-insiders
+  export EDITOR="code-insiders -w"
+  export VISUAL="code-insiders -w"
+elif command -v code 1>/dev/null 2>&1; then
+  export EDITOR="code -w"
+  export VISUAL="code -w"
+elif command -v joe 1>/dev/null 2>&1; then
+  export EDITOR=joe
+  export VISUAL=joe
+fi
+
 if [ -z "$SSH_AUTH_SOCK" ]; then
   if command -v ssh-agent 1>/dev/null 2>&1; then
     eval $(ssh-agent)
@@ -66,7 +78,7 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 fi
 
 if [ -n "$SSH_AUTH_SOCK" -a -d "$HOME/.ssh" ]; then
-  grep -l "PRIVATE KEY-----" "$HOME/.ssh/"* | xargs ssh-add -q
+  grep -l "PRIVATE KEY-----" "$HOME/.ssh/"* | xargs -r ssh-add -q
 fi
 
 clean_path
