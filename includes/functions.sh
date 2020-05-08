@@ -25,7 +25,7 @@ add_path() {
 }
 
 clean_path() {
-  PATH=$(echo $PATH | tr ':' '\n' | awk '!seen[$0]++' - | sed -z '$ s/\n$//' | tr '\n' ':')
+  PATH=$(echo $PATH | tr ':' '\n' | awk '!seen[$0]++' - | tr '\n' ':' | sed -e s/.$//)
 }
 
 link_directory() {
