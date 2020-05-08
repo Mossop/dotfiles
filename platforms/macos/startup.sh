@@ -4,6 +4,8 @@ if command -v brew 1>/dev/null 2>&1; then
   do
     add_path "${PREFIX}/opt/${PACKAGE}/libexec/gnubin"
   done
+
+  add_path "${PREFIX}/opt/curl/bin"
 fi
 
 if [ -d "/Applications/Visual Studio Code - Insiders.app" ]; then
