@@ -38,7 +38,7 @@ unresolved = !$HG resolve -l "set:unresolved()" -T "{reporoot}/{path}\0" | xargs
 rgrep = !$HG rstatus "$1" -man0 | xargs -0 rg $2
 
 [revsetalias]
-patches = sort(head() and draft() and not desc("(abandoned)"), "desc")
+patches = sort(head() and draft() and not desc("(abandoned)"), "-date")
 patch($1) = last(first(patches, $1))
 bbase($1) = roots(ancestors($1) and draft())
 bparent($1) = parents(bbase($1))
