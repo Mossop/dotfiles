@@ -19,3 +19,5 @@ if [ -x "$HOME/mozilla/bin/startup" ]; then
 fi
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+. "$DOTFILES/platforms/macos/iterm2_shell_integration.bash"

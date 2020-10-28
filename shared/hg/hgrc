@@ -24,6 +24,7 @@ evolve =
 show =
 absorb =
 blackbox =
+fsmonitor =
 
 [alias]
 patch = up --rev "patch($1)"
