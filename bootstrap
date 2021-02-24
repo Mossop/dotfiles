@@ -4,7 +4,7 @@ set -e
 
 # These are passed on to post-bootstrap.sh
 export DOTFILES_REPO="Mossop/dotfiles"
-export DOTFILES_BRANCH="master"
+export DOTFILES_BRANCH="main"
 export DOTFILES="$HOME/dotfiles"
 
 if [ -d "$DOTFILES" ]; then
