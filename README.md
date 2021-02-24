@@ -8,21 +8,21 @@ remember how this all works.
 Something similar to the following:
 
 ```
-curl https://raw.githubusercontent.com/Mossop/dotfiles/master/bootstrap | sh
+curl https://raw.githubusercontent.com/Mossop/dotfiles/main/bootstrap | sh
 ```
 
 This will download and install the repo to `$HOME/dotfiles` and install the
 configuration files and update `$HOME/.profile` to call `$HOME/dotfiles/scripts/startup.sh`
 on login.
 
-Under the hood the [`bootstrap`](https://github.com/Mossop/dotfiles/blob/master/bootstrap)
+Under the hood the [`bootstrap`](https://github.com/Mossop/dotfiles/blob/main/bootstrap)
 script attempts to download the contents of this repository and extract it to
 `$HOME/dotfiles`. It will prefer to use `git` if installed but will fall back to
 using curl or wget to download an archive of the current state of the repository.
 
-After extraction [`scripts/post-bootstrap.sh`](https://github.com/Mossop/dotfiles/blob/master/scripts/post-bootstrap.sh)
+After extraction [`scripts/post-bootstrap.sh`](https://github.com/Mossop/dotfiles/blob/main/scripts/post-bootstrap.sh)
 is executed which writes the dotfile configuration file to `$HOME/dotfiles/.config`
-and then executes [`install`](https://github.com/Mossop/dotfiles/blob/master/install)
+and then executes [`install`](https://github.com/Mossop/dotfiles/blob/main/install)
 to actually install everything.
 
 ## Updating
@@ -31,7 +31,7 @@ to actually install everything.
 dotfiles/update
 ```
 
-The actual updating is performed by [`scripts/do-update.sh`](https://github.com/Mossop/dotfiles/blob/master/scripts/do-update.sh)
+The actual updating is performed by [`scripts/do-update.sh`](https://github.com/Mossop/dotfiles/blob/main/scripts/do-update.sh)
 which is copied to a temporary location before being executed in case the update
 process modifies that file.
 
@@ -42,7 +42,7 @@ of dotfiles and extracts it to a temporary directory. The current dotfiles
 directory is wiped excluding the `.config` file and then the new files are copied
 into place.
 
-Afterwards [`scripts/post-update.sh`](https://github.com/Mossop/dotfiles/blob/master/scripts/post-update.sh)
+Afterwards [`scripts/post-update.sh`](https://github.com/Mossop/dotfiles/blob/main/scripts/post-update.sh)
 is executed which removes the temporary update script and then executes
-[`install`](https://github.com/Mossop/dotfiles/blob/master/install) to install
+[`install`](https://github.com/Mossop/dotfiles/blob/main/install) to install
 everything.
