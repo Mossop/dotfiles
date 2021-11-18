@@ -1,5 +1,7 @@
 [ui]
 merge = internal:merge
+mergemarkers = detailed
+mergemarkertemplate = "{separate(' ', fxheads, bookmarks, tags, "{node|short}")}"
 username = Dave Townsend <dtownsend@oxymoronical.com>
 ignore = ~/dotfiles/shared/hg/hgignore
 tweakdefaults = true
@@ -35,7 +37,7 @@ bstatus = status --rev "bparent($1)" --rev $1
 rdiff = diff --rev "$1^" --rev "$1"
 rstatus = status --rev "$1^" --rev "$1"
 smart-annotate = annotate -w --skip ignored_changesets
-unresolved = !$HG resolve -l "set:unresolved()" -T "{reporoot}/{path}\0" | xargs -0 $EDITOR
+unresolved = !$HG files -T "{reporoot}/{path}\0" "set:unresolved()" | xargs -0 $EDITOR
 rgrep = !$HG rstatus "$1" -man0 | xargs -0 rg $2
 
 [revsetalias]
@@ -81,3 +83,6 @@ get_ignored_changesets = shell:cat `hg root`/.hg-annotate-ignore-revs 2> /dev/nu
 
 [rebase]
 experimental.inmemory = True
+
+[experimental]
+graphshorten = true
