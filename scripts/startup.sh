@@ -53,6 +53,7 @@ if [ -d "$DOTFILES/external/pyenv" ]; then
   export PYENV_ROOT="$DOTFILES/external/pyenv"
   add_path "$DOTFILES/external/pyenv/bin"
 
+  eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
