@@ -9,3 +9,5 @@
   excludesFile = ~/dotfiles/shared/git/gitignore
 [diff]
   compactionHeuristic = true
+[init]
+  defaultBranch = main
