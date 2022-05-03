@@ -35,8 +35,6 @@ function virtualenv_info(){
 }
 typeset -fx virtualenv_info
 
-VENV="\$(virtualenv_info)";
-
 HOSTNAME=$(hostname | cut -d"." -f1 | tr '[:upper:]' '[:lower:]')
 if [ "$DOTFILES_PLATFORM" == "windows" ]; then
   NAMEPROMPT="${HOSTNAME}"
@@ -44,7 +42,7 @@ else
   NAMEPROMPT="\\u@${HOSTNAME}"
 fi
 
-export PROMPT_START="\\[\\033]0;${NAMEPROMPT}\\007\\033[1;32m\\]${NAMEPROMPT}\\[\\033[0m\\]${VENV}"
+export PROMPT_START="\\[\\033]0;${NAMEPROMPT}\\007\\033[1;32m\\]${NAMEPROMPT}\\[\\033[0m\\]`virtualenv_info`"
 export PROMPT_END="\\n\\[\\033[1;34m\\]\\W\\[\\033[0m\\]\\$ "
 
 export PS1="${PROMPT_START}${PROMPT_END}"
