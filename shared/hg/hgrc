@@ -1,13 +1,22 @@
 [ui]
-merge = internal:merge
+merge = code
 mergemarkers = detailed
 mergemarkertemplate = "{separate(' ', fxheads, bookmarks, tags, "{node|short}")}"
 username = Dave Townsend <dtownsend@oxymoronical.com>
 ignore = ~/dotfiles/shared/hg/hgignore
 tweakdefaults = true
 
+[merge-tools]
+code.priority = 100
+code.premerge = True
+code.args = --wait --merge $other $local $base $output
+
 [diff]
 unified = 8
+
+[extdiff]
+cmd.vsd = code
+opts.vsd = --wait --diff
 
 [defaults]
 outgoing = --stat
@@ -86,3 +95,4 @@ experimental.inmemory = True
 
 [experimental]
 graphshorten = true
+evolution.in-memory = yes
