@@ -1,0 +1,26 @@
+[paths]
+default-push = ssh://hg.mozilla.org/users/dtownsend_mozilla.com/working/unified
+default = https://hg.mozilla.org/mozilla-unified/
+working = https://hg.mozilla.org/users/dtownsend_mozilla.com/working/unified
+
+[phases]
+publish = False
+
+[extensions]
+firefoxtree = ~/.mozbuild/version-control-tools/hgext/firefoxtree
+mozext = ~/.mozbuild/version-control-tools/hgext/mozext
+push-to-try = ~/.mozbuild/version-control-tools/hgext/push-to-try
+
+[mozilla]
+ircnick = Mossop
+
+[phabricator]
+url = https://phabricator.services.mozilla.com/
+callsign = MOZILLACENTRAL
+
+[auth]
+mozilla.schemes = https
+mozilla.prefix = phabricator.services.mozilla.com
+
+[mozext]
+noautocritic = true
