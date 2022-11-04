@@ -38,3 +38,19 @@ update_git_repo "$DOTFILES/external/pyenv"
 update_git_repo "$DOTFILES/external/pyenv/plugins/pyenv-virtualenv"
 
 maybe_source "$PLATFORM_DIR/install.sh"
+
+mkdir -p "$HOME/.ssh"
+rm -f "$HOME/.ssh/id_rsa_digitalocean.pub"
+rm -f "$HOME/.ssh/id_rsa_github.pub"
+rm -f "$HOME/.ssh/id_rsa_mozilla.pub"
+rm -f "$HOME/.ssh/id_rsa_personal.pub"
+rm -f "$HOME/.ssh/id_rsa_heroku.pub"
+if [ -f "$HOME/.ssh/config" ]; then
+  if [ $(stat -c %s "$HOME/.ssh/config") = "427" ]; then
+    rm "$HOME/.ssh/config"
+  fi
+fi
+
+if [ ! -f "$HOME/.ssh/config" ]; then
+  echo "Include \"$DOTFILES/shared/ssh/ssh_config\"" > "$HOME/.ssh/config"
+fi

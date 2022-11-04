@@ -70,15 +70,5 @@ elif command -v joe 1>/dev/null 2>&1; then
   export VISUAL=joe
 fi
 
-if [ -z "$SSH_AUTH_SOCK" ]; then
-  if command -v ssh-agent 1>/dev/null 2>&1; then
-    eval $(ssh-agent) > /dev/null
-  fi
-fi
-
-if [ -n "$SSH_AUTH_SOCK" -a -d "$HOME/.ssh" ]; then
-  grep -l "PRIVATE KEY-----" "$HOME/.ssh/"* | xargs -r ssh-add >/dev/null 2>/dev/null
-fi
-
 clean_path
 clean_up
