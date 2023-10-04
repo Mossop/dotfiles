@@ -1,0 +1,3 @@
+#! /bin/bash
+
+curl -s -S -H "Accept: application/json" $1 | jq
