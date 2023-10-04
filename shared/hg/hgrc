@@ -1,5 +1,5 @@
 [ui]
-merge = code
+merge = internal:merge3
 mergemarkers = detailed
 mergemarkertemplate = "{separate(' ', fxheads, bookmarks, tags, "{node|short}")}"
 username = Dave Townsend <dtownsend@oxymoronical.com>
@@ -35,7 +35,7 @@ evolve =
 show =
 absorb =
 blackbox =
-fsmonitor =
+#fsmonitor =
 
 [alias]
 patch = up --rev "patch($1)"
