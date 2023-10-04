@@ -1,0 +1,3 @@
+#! /bin/bash
+
+docker logs --since 30m -f $@
