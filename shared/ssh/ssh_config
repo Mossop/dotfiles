@@ -18,28 +18,36 @@ Host hg.mozilla.org
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_mozilla.pub"
   IdentitiesOnly yes
 
-# DigitalOcean droplets
+# Online servers
 
-Host cloud
-  HostName cloud.clantownsend.com
+Host masala
+  HostName masala.clantownsend.com
+  IdentityFile "~/dotfiles/shared/ssh/id_rsa_digitalocean.pub"
+  IdentitiesOnly yes
 
-Host cloud
+Host balti
+  HostName balti.clantownsend.com
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_digitalocean.pub"
   IdentitiesOnly yes
 
 # Local machines
-Host mandelbrot
-  HostName mandelbrot.home.clantownsend.com
+
+Host tikka
+  HostName tikka.clantownsend.com
   User dave
 
-Host menger
-  HostName menger.home.clantownsend.com
+Host madras
+  HostName madras.clantownsend.com
   User dave
 
-Host lyapunov
-  HostName lyapunov
-  User dave
+Host ap1 ap2
+  User admin
 
-Host mandelbrot menger lyapunov
+Host korma
+  User dave
+  IdentityFile "~/dotfiles/shared/ssh/id_rsa_mozilla.pub"
+  IdentitiesOnly yes
+
+Host tikka madras ap1 ap2 ap3
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_personal.pub"
   IdentitiesOnly yes
