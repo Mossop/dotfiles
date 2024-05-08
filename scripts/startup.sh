@@ -47,15 +47,6 @@ export PROMPT_END="\\n\\[\\033[1;34m\\]\\W\\[\\033[0m\\]\\$ "
 
 export PS1="${PROMPT_START}${PROMPT_END}"
 
-if [ -d "$DOTFILES/external/pyenv" ]; then
-  export PYENV_ROOT="$DOTFILES/external/pyenv"
-  add_path "$DOTFILES/external/pyenv/bin"
-
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
-
 maybe_source "$PLATFORM_DIR/startup.sh"
 
 if command -v code-insiders 1>/dev/null 2>&1; then
