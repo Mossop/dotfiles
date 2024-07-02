@@ -34,9 +34,6 @@ echo "source \"$DOTFILES/scripts/bashrc.sh\" # $GREPTERM" >> "$HOME/.bashrc"
 install_files "$DOTFILES/home" "$HOME"
 install_files "$PLATFORM_DIR/home" "$HOME"
 
-update_git_repo "$DOTFILES/external/pyenv"
-update_git_repo "$DOTFILES/external/pyenv/plugins/pyenv-virtualenv"
-
 maybe_source "$PLATFORM_DIR/install.sh"
 
 mkdir -p "$HOME/.ssh"
