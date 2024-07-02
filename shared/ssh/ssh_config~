@@ -43,8 +43,7 @@ Host madras
 Host ap1 ap2
   User admin
 
-Host korma korma-win korma-linux
-  HostName korma.home.clantownsend.com
+Host korma
   User dave
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_mozilla.pub"
   IdentitiesOnly yes

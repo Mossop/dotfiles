@@ -20,8 +20,6 @@ fi
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-. "$DOTFILES/platforms/macos/iterm2_shell_integration.bash"
-
 if [ -f "/opt/homebrew/bin/mise" ]; then
   eval "$(/opt/homebrew/bin/mise activate bash)"
 fi
