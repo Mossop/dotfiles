@@ -4,7 +4,7 @@
 slash = true
 
 [color]
-mode = win32
+mode = ansi
 log.description = white
 description.draft = white
 log.obsolete = white
