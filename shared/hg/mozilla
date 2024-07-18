@@ -1,7 +1,8 @@
 [paths]
-default-push = ssh://hg.mozilla.org/users/dtownsend_mozilla.com/working/unified
 default = https://hg.mozilla.org/mozilla-unified/
+default:pushurl = ssh://hg.mozilla.org/users/dtownsend_mozilla.com/working/unified
 working = https://hg.mozilla.org/users/dtownsend_mozilla.com/working/unified
+working:pushurl = ssh://hg.mozilla.org/users/dtownsend_mozilla.com/working/unified
 
 [phases]
 publish = False

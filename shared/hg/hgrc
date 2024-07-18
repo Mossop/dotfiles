@@ -1,5 +1,5 @@
 [ui]
-merge = internal:merge3
+merge = code
 mergemarkers = detailed
 mergemarkertemplate = "{separate(' ', fxheads, bookmarks, tags, "{node|short}")}"
 username = Dave Townsend <dtownsend@oxymoronical.com>
