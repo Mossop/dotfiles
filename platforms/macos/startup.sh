@@ -14,8 +14,8 @@ elif [ -d "/Applications/Visual Studio Code.app" ]; then
   add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
 
-if [ -x "$HOME/mozilla/bin/startup" ]; then
-  alias mozb="$HOME/mozilla/bin/startup"
+if [ -f "$HOME/mozilla/bin/activate" ]; then
+  alias mozb=". $HOME/mozilla/bin/activate"
 fi
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -23,3 +23,5 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 if [ -f "/opt/homebrew/bin/mise" ]; then
   eval "$(/opt/homebrew/bin/mise activate bash)"
 fi
+
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
