@@ -10,6 +10,6 @@
 [init]
   defaultBranch = main
 [pretty]
-  simple = format:%C(yellow)%h%Creset %C(green)%<(12,trunc)%al%Creset %C(brightwhite)%s%Creset %C(cyan)%(decorate:prefix=,suffix=,tag=,separator= )%Creset
+  simple = tformat:%C(yellow)%h%Creset %C(green)%<(12,trunc)%al%Creset %C(brightwhite)%s%Creset%C(cyan)%(decorate:tag=true)%Creset
 [alias]
   blog = log central..@{0} --pretty=simple
