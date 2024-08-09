@@ -1,0 +1,15 @@
+[color]
+  ui = true
+[user]
+  name = Dave Townsend
+  email = dtownsend@oxymoronical.com
+[core]
+  excludesFile = ~/dotfiles/shared/git/gitignore
+[diff]
+  compactionHeuristic = true
+[init]
+  defaultBranch = main
+[pretty]
+  simple = format:%C(yellow)%h%Creset %C(green)%<(12,trunc)%al%Creset %C(brightwhite)%s%Creset %C(cyan)%(decorate:prefix=,suffix=,tag=,separator= )%Creset
+[alias]
+  blog = log central..@{0} --pretty=simple

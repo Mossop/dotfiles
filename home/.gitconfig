@@ -1,13 +1,2 @@
-[color]
-  ui = true
-[user]
-  name = Dave Townsend
-  email = dtownsend@oxymoronical.com
-[push]
-  default = upstream
-[core]
-  excludesFile = ~/dotfiles/shared/git/gitignore
-[diff]
-  compactionHeuristic = true
-[init]
-  defaultBranch = main
+[include]
+  path = ~/dotfiles/shared/git/gitconfig
