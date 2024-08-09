@@ -48,6 +48,12 @@ Host korma korma-win korma-linux
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_mozilla.pub"
   IdentitiesOnly yes
 
+Host korma-win
+  HostName korma-win.home.clantownsend.com
+
+Host korma-linux
+  HostName korma-linux.home.clantownsend.com
+
 Host tikka madras ap1 ap2 ap3
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_personal.pub"
   IdentitiesOnly yes
