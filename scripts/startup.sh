@@ -54,6 +54,10 @@ elif command -v joe 1>/dev/null 2>&1; then
   export VISUAL=joe
 fi
 
+if [ "$TERM_PROGRAM" == "vscode" ]; then
+  . "$(code --locate-shell-integration-path bash)"
+fi
+
 clean_path
 clean_up
 
