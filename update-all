@@ -1,0 +1,7 @@
+#! /bin/bash
+
+for server in balti masala tikka madras
+do
+  echo Updating $server...
+  ssh $server ./dotfiles/update
+done
