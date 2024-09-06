@@ -1,5 +1,5 @@
 if [ -f "$HOME/mozilla/bin/activate" ]; then
-  alias mozb=". $HOME/mozilla/bin/activate"
+  export MOZBUILD="$HOME/mozilla/bin/activate"
 fi
 
 if [ -f "$HOME/.local/bin/mise" ]; then

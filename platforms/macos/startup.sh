@@ -15,7 +15,7 @@ elif [ -d "/Applications/Visual Studio Code.app" ]; then
 fi
 
 if [ -f "$HOME/mozilla/bin/activate" ]; then
-  alias mozb=". $HOME/mozilla/bin/activate"
+  export MOZBUILD="$HOME/mozilla/bin/activate"
 fi
 
 export BASH_SILENCE_DEPRECATION_WARNING=1

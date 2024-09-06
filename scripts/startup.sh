@@ -56,3 +56,12 @@ fi
 
 clean_path
 clean_up
+
+if [ ! -z "$MOZBUILD" ]; then
+  alias mozb=". $MOZBUILD"
+
+  if [ ! -z "$ACTIVATE_MOZBUILD" ]; then
+    unset ACTIVATE_MOZBUILD
+    . $MOZBUILD
+  fi
+fi
