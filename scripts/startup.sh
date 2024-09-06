@@ -52,7 +52,9 @@ elif command -v joe 1>/dev/null 2>&1; then
 fi
 
 if [ "$TERM_PROGRAM" == "vscode" ]; then
-  . "$(code --locate-shell-integration-path bash)"
+  if [ -z "$VSCODE_SHELL_INTEGRATION" ]; then
+    . "$(code --locate-shell-integration-path bash)"
+  fi
 else
   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
   . "$DOTFILES/platforms/macos/iterm2_shell_integration.bash"
