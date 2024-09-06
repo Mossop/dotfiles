@@ -5,8 +5,7 @@ no_ansi = False
 safe_mode = False
 
 [git]
-remote = 
-command_path = 
+remote = central
 
 [hg]
 command_path = hg
