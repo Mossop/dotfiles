@@ -131,10 +131,16 @@ clean_up() {
 
 if [[ ${OSTYPE:0:5} == "linux" ]]; then
   DOTFILES_PLATFORM="linux"
+  DIR_SEP="/"
+  BIN_EXT=""
 elif [[ ${OSTYPE:0:6} == "darwin" ]]; then
   DOTFILES_PLATFORM="macos"
+  DIR_SEP="/"
+  BIN_EXT=""
 else
   DOTFILES_PLATFORM="windows"
+  DIR_SEP="\\"
+  BIN_EXT=".exe"
 fi
 
 PLATFORM_DIR="$DOTFILES/platforms/$DOTFILES_PLATFORM"

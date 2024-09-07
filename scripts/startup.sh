@@ -39,17 +39,12 @@ export PS1="${PROMPT_START}${PROMPT_END}"
 
 maybe_source "$PLATFORM_DIR/startup.sh"
 
-if command -v code-insiders 1>/dev/null 2>&1; then
-  export VSCODE="code-insiders"
-  alias code=code-insiders
-  export EDITOR="code-insiders -w"
-  export VISUAL="code-insiders -w"
-elif command -v code 1>/dev/null 2>&1; then
+if command -v code 1>/dev/null 2>&1; then
   export VSCODE="code"
   export EDITOR="code -w"
   export VISUAL="code -w"
 elif [ ! -z "$VSCODE_GIT_EDITOR_NODE" ]; then
-  export VSCODE=$(echo $VSCODE_GIT_EDITOR_NODE | sed -e s~/node\$~/bin/remote-cli/code~)
+  export VSCODE=$(echo $VSCODE_GIT_EDITOR_NODE | sed -e s~\\${DIR_SEP}~/~g | sed -e s~/node${BIN_EXT}\$~/bin/remote-cli/code${BIN_EXT}~ | sed -e s~/code${BIN_EXT}\$~/code.cmd~ | sed -e s~^C:~/c~)
   alias code=$VSCODE
   export EDITOR="$VSCODE -w"
   export VISUAL="$VSCODE -w"
