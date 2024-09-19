@@ -1,0 +1,5 @@
+#! /bin/bash
+
+. $HOME/dotfiles/shared/git/formats
+
+git log central..@{0} --format="%h %d"

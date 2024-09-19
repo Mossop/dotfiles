@@ -12,5 +12,4 @@
 [pretty]
   simple = tformat:%C(yellow)%h%Creset %C(green)%<(12,trunc)%al%Creset %C(brightwhite)%s%Creset%C(cyan)%(decorate:tag=)%Creset
 [alias]
-  blog = log central..@{0} --pretty=simple
   amend = commit --amend --no-edit

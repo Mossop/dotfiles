@@ -1,0 +1,5 @@
+#! /bin/bash
+
+. $HOME/dotfiles/shared/git/formats
+
+git branch --format '%(refname)' $@ | git for-each-ref --stdin --format="${BRANCH_FORMAT}"

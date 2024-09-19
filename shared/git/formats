@@ -1,0 +1,5 @@
+AUTHOR="%(color:green)%(authoremail:localpart)%(color:normal)"
+DESCRIPTION="%(color:brightwhite)%(contents:subject)%(color:normal)"
+REFLIST="%(color:cyan)%(decorate:tag=)%(color:normal)"
+
+BRANCH_FORMAT="%(if)%(HEAD)%(then)%(color:brightgreen)*%(else)%(color:yellow) ​%(end) %(align:20)%(refname:short)%(end)%(color:normal) %(align:18)$AUTHOR%(end) $DESCRIPTION"
