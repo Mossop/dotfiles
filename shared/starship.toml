@@ -1,0 +1,26 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = '''$username[@](bold white)$hostname$custom
+$git_branch$directory$character'''
+
+[hostname]
+ssh_only = false
+style = 'bold green'
+format = '[$ssh_symbol$hostname]($style) '
+
+[username]
+show_always = true
+format = '[$user]($style)'
+
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style)'
+truncation_length = 1
+
+[git_branch]
+format = '[\[$branch(:$remote_branch)\]]($style) '
+style = 'bold yellow'
+
+[custom.mozbuild]
+command = "$BUILD_BASE/bin/prompt"
+when = '[ ! -z "$BUILD_BASE" ]'
+style = 'bold yellow'

@@ -32,10 +32,10 @@ else
   NAMEPROMPT="\\u@${HOSTNAME}"
 fi
 
-export PROMPT_START="\\[\e]0;${NAMEPROMPT}\\007\e[1;32m\\]${NAMEPROMPT}\\[\e[0m\\]"
-export PROMPT_END="\\n\$(__git_ps1 \"\e[33m[%s]\e[0m \")\\[\e[1;34m\\]\\W\\[\e[0m\\]\\$ "
+# export PROMPT_START="\\[\e]0;${NAMEPROMPT}\\007\e[1;32m\\]${NAMEPROMPT}\\[\e[0m\\]"
+# export PROMPT_END="\\n\$(__git_ps1 \"\e[33m[%s]\e[0m \")\\[\e[1;34m\\]\\W\\[\e[0m\\]\\$ "
 
-export PS1="${PROMPT_START}${PROMPT_END}"
+# export PS1="${PROMPT_START}${PROMPT_END}"
 
 maybe_source "$PLATFORM_DIR/startup.sh"
 

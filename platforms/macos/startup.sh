@@ -14,10 +14,6 @@ elif [ -d "/Applications/Visual Studio Code.app" ]; then
   add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
 
-if [ -f "$HOME/mozilla/bin/activate" ]; then
-  export MOZBUILD="$HOME/mozilla/bin/activate"
-fi
-
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 if [ -f "/opt/homebrew/bin/mise" ]; then
@@ -25,3 +21,8 @@ if [ -f "/opt/homebrew/bin/mise" ]; then
 fi
 
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+if [ -x "/opt/homebrew/bin/starship" ]; then
+  export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
+  eval "$(/opt/homebrew/bin/starship init bash)"
+fi
