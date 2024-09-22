@@ -1,6 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = '''$username[@](bold white)$hostname$custom
+format = '''$username[@](bold green)$hostname$custom
 $git_branch$directory$character'''
 
 [hostname]
@@ -11,6 +11,7 @@ format = '[$ssh_symbol$hostname]($style) '
 [username]
 show_always = true
 format = '[$user]($style)'
+style_user = 'bold green'
 
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style)'
@@ -24,3 +25,7 @@ style = 'bold yellow'
 command = "$BUILD_BASE/bin/prompt"
 when = '[ ! -z "$BUILD_BASE" ]'
 style = 'bold yellow'
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold green)'
