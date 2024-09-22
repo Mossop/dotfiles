@@ -6,7 +6,8 @@ $git_branch$directory$character'''
 [hostname]
 ssh_only = false
 style = 'bold green'
-format = '[$ssh_symbol$hostname]($style) '
+format = '[$hostname$ssh_symbol]($style) '
+ssh_symbol = ' 🌐'
 
 [username]
 show_always = true
