@@ -1,7 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = '''$username[@](bold green)$hostname$custom
-$git_branch$directory$character'''
+$git_branch$git_state$directory$character'''
 
 [hostname]
 ssh_only = false
