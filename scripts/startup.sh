@@ -39,7 +39,7 @@ if command -v code 1>/dev/null 2>&1; then
   export EDITOR="code -w"
   export VISUAL="code -w"
 elif [ ! -z "$VSCODE_GIT_EDITOR_NODE" ]; then
-  export VSCODE=$(echo $VSCODE_GIT_EDITOR_NODE | sed -e s~\\${DIR_SEP}~/~g | sed -e s~/node${BIN_EXT}\$~/bin/remote-cli/code${BIN_EXT}~ | sed -e s~/code${BIN_EXT}\$~/code.cmd~ | sed -e s~^C:~/c~)
+  export VSCODE=$(echo $VSCODE_GIT_EDITOR_NODE | sed -e s~\\${DIR_SEP}~/~g | sed -e s~/node${BIN_EXT}\$~/bin/remote-cli/code${BIN_EXT}~ | sed -e s~/code.exe\$~/code.cmd~ | sed -e s~^C:~/c~)
   alias code=$VSCODE
   export EDITOR="$VSCODE -w"
   export VISUAL="$VSCODE -w"
