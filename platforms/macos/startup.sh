@@ -16,13 +16,4 @@ fi
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-if [ -f "/opt/homebrew/bin/mise" ]; then
-  eval "$(/opt/homebrew/bin/mise activate bash)"
-fi
-
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-if [ -x "/opt/homebrew/bin/starship" ]; then
-  export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
-  eval "$(/opt/homebrew/bin/starship init bash)"
-fi

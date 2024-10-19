@@ -32,11 +32,6 @@ else
   NAMEPROMPT="\\u@${HOSTNAME}"
 fi
 
-# export PROMPT_START="\\[\e]0;${NAMEPROMPT}\\007\e[1;32m\\]${NAMEPROMPT}\\[\e[0m\\]"
-# export PROMPT_END="\\n\$(__git_ps1 \"\e[33m[%s]\e[0m \")\\[\e[1;34m\\]\\W\\[\e[0m\\]\\$ "
-
-# export PS1="${PROMPT_START}${PROMPT_END}"
-
 maybe_source "$PLATFORM_DIR/startup.sh"
 
 if command -v code 1>/dev/null 2>&1; then
@@ -60,6 +55,15 @@ if [ "$TERM_PROGRAM" == "vscode" ]; then
 else
   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
   . "$DOTFILES/platforms/macos/iterm2_shell_integration.bash"
+fi
+
+if command -v mise 1>/dev/null 2>&1; then
+  eval "$(mise activate bash)"
+fi
+
+if command -v starship 1>/dev/null 2>&1; then
+  export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
+  eval "$(starship init bash)"
 fi
 
 clean_path

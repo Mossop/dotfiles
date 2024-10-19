@@ -12,8 +12,3 @@ if [ -f "$HOME/bin/direnv.exe" ]; then
   eval "$(direnv hook bash | sed -e 's@export bash)@export bash)\
     _unmangle_direnv_paths@')"
 fi
-
-if [ -x "$HOME/.cargo/bin/starship.exe" ]; then
-  export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
-  eval "$($HOME/.cargo/bin/starship.exe init bash)"
-fi
