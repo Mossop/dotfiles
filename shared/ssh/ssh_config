@@ -30,6 +30,11 @@ Host balti
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_digitalocean.pub"
   IdentitiesOnly yes
 
+Host bhuna
+  HostName bhuna.clantownsend.com
+  IdentityFile "~/dotfiles/shared/ssh/id_rsa_digitalocean.pub"
+  IdentitiesOnly yes
+
 # Local machines
 
 Host tikka
