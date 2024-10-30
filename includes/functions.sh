@@ -11,7 +11,7 @@ install_files() {
 maybe_source() {
   local SCRIPT="$1"
 
-  if [ -f "$SCRIPT" ]; then
+  if [ -r "$SCRIPT" ]; then
     . "$SCRIPT"
   fi
 }

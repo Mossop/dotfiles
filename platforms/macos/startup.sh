@@ -16,4 +16,8 @@ fi
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+maybe_source "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+if [ -d "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password" ]; then
+  export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+fi

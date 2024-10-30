@@ -1,6 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = '''$username[@](bold green)$hostname$custom
+format = '''$username[@](bold green)$hostname${custom.mozbuild}
 $git_branch$git_state$directory$character'''
 
 [hostname]
@@ -21,6 +21,7 @@ truncation_length = 1
 [git_branch]
 format = '[\[$branch(:$remote_branch)\]]($style) '
 style = 'bold yellow'
+only_attached = true
 
 [custom.mozbuild]
 command = "$BUILD_BASE/bin/prompt"

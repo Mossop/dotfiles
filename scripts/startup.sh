@@ -1,5 +1,13 @@
+if [ -n "$DOTFILES_SOURCED" ]; then
+  return
+fi
+
+DOTFILES_SOURCED=1
+
 if [ -z "$DOTFILES_BASHRC_SOURCED" ]; then
-  . $(dirname "${BASH_SOURCE[0]:-$0}")/bashrc.sh
+  if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+  fi
 fi
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
@@ -24,13 +32,6 @@ alias ls="ls --color"
 export LESS="FRSX"
 unset HISTFILE
 unset MAILCHECK
-
-HOSTNAME=$(hostname | cut -d"." -f1 | tr '[:upper:]' '[:lower:]')
-if [ "$DOTFILES_PLATFORM" == "windows" ]; then
-  NAMEPROMPT="${HOSTNAME}"
-else
-  NAMEPROMPT="\\u@${HOSTNAME}"
-fi
 
 maybe_source "$PLATFORM_DIR/startup.sh"
 
@@ -58,12 +59,18 @@ else
 fi
 
 if command -v mise 1>/dev/null 2>&1; then
-  eval "$(mise activate bash)"
+  if [ -z "$PS1" ]; then
+    eval "$(mise activate bash --shims)"
+  else
+    eval "$(mise activate bash)"
+  fi
 fi
 
-if command -v starship 1>/dev/null 2>&1; then
-  export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
-  eval "$(starship init bash)"
+if [ -n "$PS1" ]; then
+  if command -v starship 1>/dev/null 2>&1; then
+    export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
+    eval "$(starship init bash)"
+  fi
 fi
 
 clean_path
