@@ -1,0 +1,22 @@
+[user]
+name = "Dave Townsend"
+email = "dtownsend@oxymoronical.com"
+
+#[core]
+#fsmonitor = "watchman"
+
+[colors]
+"diff token" = { underline = false }
+
+[diff.git]
+context = 8
+
+[diff.color-words]
+context = 8
+
+[ui]
+merge-editor = "vscode"
+
+[revset-aliases]
+"branch()" = "branch(@)"
+"branch(x)" = "(::x | x::) & mutable()"
