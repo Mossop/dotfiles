@@ -33,6 +33,8 @@ export LESS="FRSX"
 unset HISTFILE
 unset MAILCHECK
 
+export JJ_CONFIG="$DOTFILES/shared/jj/config.toml"
+
 maybe_source "$PLATFORM_DIR/startup.sh"
 
 if command -v code 1>/dev/null 2>&1; then
