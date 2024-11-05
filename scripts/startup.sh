@@ -52,7 +52,7 @@ export VISUAL="$EDITOR"
 
 if [ "$TERM_PROGRAM" == "vscode" ]; then
   if [ -z "$VSCODE_SHELL_INTEGRATION" ]; then
-    . "$(code --locate-shell-integration-path bash)"
+    . "$($VSCODE --locate-shell-integration-path bash)"
   fi
 else
   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
