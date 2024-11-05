@@ -40,16 +40,15 @@ maybe_source "$PLATFORM_DIR/startup.sh"
 if command -v code 1>/dev/null 2>&1; then
   export VSCODE="code"
   export EDITOR="code -w"
-  export VISUAL="code -w"
-elif [ ! -z "$VSCODE_GIT_EDITOR_NODE" ]; then
-  export VSCODE=$(echo $VSCODE_GIT_EDITOR_NODE | sed -e s~\\${DIR_SEP}~/~g | sed -e s~/node${BIN_EXT}\$~/bin/remote-cli/code${BIN_EXT}~ | sed -e s~/code.exe\$~/code.cmd~ | sed -e s~^C:~/c~)
+elif command -v code.cmd 1>/dev/null 2>&1; then
+  export VSCODE="code.cmd"
   alias code=$VSCODE
   export EDITOR="$VSCODE -w"
-  export VISUAL="$VSCODE -w"
 elif command -v joe 1>/dev/null 2>&1; then
   export EDITOR=joe
-  export VISUAL=joe
 fi
+
+export VISUAL="$EDITOR"
 
 if [ "$TERM_PROGRAM" == "vscode" ]; then
   if [ -z "$VSCODE_SHELL_INTEGRATION" ]; then
