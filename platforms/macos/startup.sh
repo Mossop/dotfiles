@@ -8,11 +8,8 @@ if command -v brew 1>/dev/null 2>&1; then
   add_path "${PREFIX}/opt/curl/bin"
 fi
 
-if [ -d "/Applications/Visual Studio Code - Insiders.app" ]; then
-  add_path "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
-elif [ -d "/Applications/Visual Studio Code.app" ]; then
-  add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-fi
+add_path "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
+add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
