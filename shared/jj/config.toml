@@ -16,6 +16,7 @@ context = 8
 
 [ui]
 merge-editor = "vscode"
+pager = "less -FRX"
 
 [revset-aliases]
 "branch()" = "branch(@)"
