@@ -15,11 +15,6 @@ DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$
 . "$DOTFILES/includes/functions.sh"
 . "$DOTFILES/includes/config.sh"
 
-add_path "$HOME/bin"
-add_path "$HOME/.local/bin"
-add_path "$DOTFILES/bin"
-add_path "$PLATFORM_DIR/bin"
-
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
@@ -36,6 +31,11 @@ unset MAILCHECK
 export JJ_CONFIG="$DOTFILES/shared/jj/config.toml"
 
 maybe_source "$PLATFORM_DIR/startup.sh"
+
+add_path "$DOTFILES/bin"
+add_path "$PLATFORM_DIR/bin"
+add_path "$HOME/.local/bin"
+add_path "$HOME/bin"
 
 if command -v code 1>/dev/null 2>&1; then
   export VSCODE="code"
