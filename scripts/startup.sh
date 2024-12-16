@@ -4,6 +4,10 @@ fi
 
 DOTFILES_SOURCED=1
 
+if [ -n "$PS1" -a -f "$HOME/.config/ble.sh/ble.sh" ]; then
+  [[ $- == *i* ]] && source "$HOME/.config/ble.sh/ble.sh" --noattach
+fi
+
 if [ -z "$DOTFILES_BASHRC_SOURCED" ]; then
   if [ -f "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
@@ -25,7 +29,6 @@ fi
 alias ls="ls --color"
 
 export LESS="FRSX"
-unset HISTFILE
 unset MAILCHECK
 
 export JJ_CONFIG="$DOTFILES/shared/jj/config.toml"
@@ -63,15 +66,23 @@ if [ -n "$PS1" ]; then
     export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
     eval "$(starship init bash)"
   fi
-fi
 
-if [ "$TERM_PROGRAM" == "vscode" ]; then
-  if [ -z "$VSCODE_SHELL_INTEGRATION" ]; then
-    . "$($VSCODE --locate-shell-integration-path bash)"
+  if [ "$TERM_PROGRAM" == "vscode" ]; then
+    if [ -z "$VSCODE_SHELL_INTEGRATION" ]; then
+      . "$($VSCODE --locate-shell-integration-path bash)"
+    fi
+  else
+    export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
+    . "$DOTFILES/platforms/macos/iterm2_shell_integration.bash"
   fi
-else
-  export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
-  . "$DOTFILES/platforms/macos/iterm2_shell_integration.bash"
+
+  if command -v atuin 1>/dev/null 2>&1; then
+    eval "$(atuin init bash)"
+  fi
+
+  if [ -f "$HOME/.config/ble.sh/ble.sh" ]; then
+    [[ ! ${BLE_VERSION-} ]] || ble-attach
+  fi
 fi
 
 clean_path
