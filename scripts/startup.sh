@@ -77,6 +77,7 @@ if [ -n "$PS1" ]; then
   fi
 
   if command -v atuin 1>/dev/null 2>&1; then
+    export ATUIN_CONFIG_DIR="$DOTFILES/shared/atuin"
     eval "$(atuin init bash)"
   fi
 
