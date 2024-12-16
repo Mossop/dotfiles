@@ -17,6 +17,7 @@ context = 8
 [ui]
 merge-editor = "vscode"
 pager = "less -FRX"
+diff.format = "git"
 
 [revset-aliases]
 "branch()" = "branch(@)"
