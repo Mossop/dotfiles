@@ -4,8 +4,8 @@ fi
 
 DOTFILES_SOURCED=1
 
-if [ -n "$PS1" -a -f "$HOME/.config/ble.sh/ble.sh" ]; then
-  [[ $- == *i* ]] && source "$HOME/.config/ble.sh/ble.sh" --noattach
+if [ -n "$PS1" -a -f "$HOME/.local/share/blesh/ble.sh" ]; then
+  [[ $- == *i* ]] && source "$HOME/.local/share/blesh/ble.sh" --noattach
 fi
 
 if [ -z "$DOTFILES_BASHRC_SOURCED" ]; then
@@ -80,7 +80,7 @@ if [ -n "$PS1" ]; then
     eval "$(atuin init bash)"
   fi
 
-  if [ -f "$HOME/.config/ble.sh/ble.sh" ]; then
+  if [ -f "$HOME/.local/share/blesh/ble.sh" ]; then
     [[ ! ${BLE_VERSION-} ]] || ble-attach
   fi
 fi
