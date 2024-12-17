@@ -8,6 +8,9 @@ bleopt complete_ambiguous=
 bleopt complete_menu_complete=
 bleopt complete_menu_complete_opts=
 
+# Needed for VSCode integration markers
+bleopt exec_exit_mark=
+
 bind 'set mark-directories on'
 bind 'set mark-symlinked-directories on'
 bind 'set keyseq-timeout 1'

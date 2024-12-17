@@ -13,7 +13,7 @@ fi
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
 
 if [ -n "$PS1" -a -f "$HOME/.local/share/blesh/ble.sh" ]; then
-  [[ $- == *i* ]] && source "$HOME/.local/share/blesh/ble.sh" --noattach --rcfile "$DOTFILES/shared/blesh.rc"
+  . "$HOME/.local/share/blesh/ble.sh" --noattach --rcfile "$DOTFILES/shared/blesh.rc"
 fi
 
 . "$DOTFILES/includes/functions.sh"
@@ -81,7 +81,7 @@ if [ -n "$PS1" ]; then
     eval "$(atuin init bash)"
   fi
 
-  if [ -f "$HOME/.local/share/blesh/ble.sh" ]; then
+  if [ -n "$HOME/.local/share/blesh/ble.sh" ]; then
     [[ ! ${BLE_VERSION-} ]] || ble-attach
   fi
 fi
