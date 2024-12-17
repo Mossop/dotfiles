@@ -2,6 +2,18 @@
 
 ble-face syntax_error="fg=203"
 ble-face auto_complete="fg=000"
+ble-face syntax_param_expansion="fg=cyan"
+
+ble-face varname_array="ref:syntax_param_expansion"
+ble-face varname_empty="ref:syntax_param_expansion"
+ble-face varname_export="ref:syntax_param_expansion"
+ble-face varname_expr="ref:syntax_param_expansion"
+ble-face varname_hash="ref:syntax_param_expansion"
+ble-face varname_new="ref:syntax_param_expansion"
+ble-face varname_number="ref:syntax_param_expansion"
+ble-face varname_readonly="ref:syntax_param_expansion"
+ble-face varname_transform="ref:syntax_param_expansion"
+ble-face varname_unset="ref:syntax_param_expansion"
 
 bleopt complete_auto_menu=500
 bleopt complete_ambiguous=

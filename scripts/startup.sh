@@ -12,8 +12,10 @@ fi
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
 
-if [ -n "$PS1" -a -f "$HOME/.local/share/blesh/ble.sh" ]; then
-  . "$HOME/.local/share/blesh/ble.sh" --noattach --rcfile "$DOTFILES/shared/blesh.rc"
+if [[ $- == *i* ]]; then
+  if [ -f "$HOME/.local/share/blesh/ble.sh" ]; then
+    . "$HOME/.local/share/blesh/ble.sh" --noattach --rcfile "$DOTFILES/shared/blesh.rc"
+  fi
 fi
 
 . "$DOTFILES/includes/functions.sh"
@@ -54,14 +56,14 @@ fi
 export VISUAL="$EDITOR"
 
 if command -v mise 1>/dev/null 2>&1; then
-  if [ -z "$PS1" ]; then
-    eval "$(mise activate bash --shims)"
-  else
+  if [[ $- == *i* ]]; then
     eval "$(mise activate bash)"
+  else
+    eval "$(mise activate bash --shims)"
   fi
 fi
 
-if [ -n "$PS1" ]; then
+if [[ $- == *i* ]]; then
   if command -v starship 1>/dev/null 2>&1; then
     export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
     eval "$(starship init bash)"
@@ -71,18 +73,15 @@ if [ -n "$PS1" ]; then
     if [ -z "$VSCODE_SHELL_INTEGRATION" ]; then
       . "$($VSCODE --locate-shell-integration-path bash)"
     fi
-  else
-    export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
-    . "$DOTFILES/platforms/macos/iterm2_shell_integration.bash"
-  fi
-
-  if command -v atuin 1>/dev/null 2>&1; then
-    export ATUIN_CONFIG_DIR="$DOTFILES/shared/atuin"
-    eval "$(atuin init bash)"
   fi
 
   if [ -n "$HOME/.local/share/blesh/ble.sh" ]; then
     [[ ! ${BLE_VERSION-} ]] || ble-attach
+  fi
+
+  if [ -x "$HOME/.atuin/bin/atuin" ]; then
+    export ATUIN_CONFIG_DIR="$DOTFILES/shared/atuin"
+    eval "$($HOME/.atuin/bin/atuin init bash)"
   fi
 fi
 
