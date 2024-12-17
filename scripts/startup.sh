@@ -4,10 +4,6 @@ fi
 
 DOTFILES_SOURCED=1
 
-if [ -n "$PS1" -a -f "$HOME/.local/share/blesh/ble.sh" ]; then
-  [[ $- == *i* ]] && source "$HOME/.local/share/blesh/ble.sh" --noattach
-fi
-
 if [ -z "$DOTFILES_BASHRC_SOURCED" ]; then
   if [ -f "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
@@ -15,6 +11,10 @@ if [ -z "$DOTFILES_BASHRC_SOURCED" ]; then
 fi
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
+
+if [ -n "$PS1" -a -f "$HOME/.local/share/blesh/ble.sh" ]; then
+  [[ $- == *i* ]] && source "$HOME/.local/share/blesh/ble.sh" --noattach --rcfile "$DOTFILES/shared/blesh.rc"
+fi
 
 . "$DOTFILES/includes/functions.sh"
 . "$DOTFILES/includes/config.sh"

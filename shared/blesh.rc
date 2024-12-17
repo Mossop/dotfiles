@@ -1,0 +1,20 @@
+#! /bin/sh
+
+ble-face syntax_error="fg=203"
+ble-face auto_complete="fg=000"
+
+bleopt complete_auto_menu=500
+bleopt complete_ambiguous=
+bleopt complete_menu_complete=
+bleopt complete_menu_complete_opts=
+
+bind 'set mark-directories on'
+bind 'set mark-symlinked-directories on'
+bind 'set keyseq-timeout 1'
+
+ble-bind -m emacs -f 'down' 'menu-complete'
+ble-bind -m 'emacs' -f 'C-i' 'complete insert_common'
+ble-bind -m 'emacs' -f 'TAB' 'complete insert_common'
+
+ble-bind -m 'menu_complete' -f 'C-[' 'auto_complete/cancel'
+ble-bind -m 'menu_complete' -f 'ESC' 'auto_complete/cancel'
