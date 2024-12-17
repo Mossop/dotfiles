@@ -1,5 +1,14 @@
 #! /bin/sh
 
+bleopt complete_auto_history=1
+bleopt complete_auto_menu=500
+bleopt complete_ambiguous=
+bleopt complete_menu_complete=
+bleopt complete_menu_complete_opts=
+
+# Needed for VSCode integration markers
+bleopt exec_exit_mark=
+
 ble-face syntax_error="fg=203"
 ble-face auto_complete="fg=000"
 ble-face syntax_param_expansion="fg=cyan"
@@ -15,13 +24,9 @@ ble-face varname_readonly="ref:syntax_param_expansion"
 ble-face varname_transform="ref:syntax_param_expansion"
 ble-face varname_unset="ref:syntax_param_expansion"
 
-bleopt complete_auto_menu=500
-bleopt complete_ambiguous=
-bleopt complete_menu_complete=
-bleopt complete_menu_complete_opts=
-
-# Needed for VSCode integration markers
-bleopt exec_exit_mark=
+if [ -n "$LS_COLORS" ]; then
+  bleopt filename_ls_colors="$LS_COLORS"
+fi
 
 bind 'set mark-directories on'
 bind 'set mark-symlinked-directories on'
