@@ -22,3 +22,9 @@ diff.format = "git"
 [revset-aliases]
 "branch()" = "branch(@)"
 "branch(x)" = "(::x | x::) & mutable()"
+
+[experimental-advance-branches]
+enabled-branches = ["glob:*"]
+
+[git]
+subprocess = true
