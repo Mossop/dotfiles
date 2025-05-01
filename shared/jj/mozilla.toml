@@ -1,0 +1,33 @@
+--when.repositories = [
+  "~/mozilla/source",
+  "E:/mozilla/source",
+  "/e/mozilla/source",
+]
+
+[revset-aliases]
+"trunk()" = "main@origin"
+
+#[core]
+#fsmonitor = "watchman"
+
+[core.watchman]
+register-snapshot-trigger = true
+
+[git]
+fetch = ["working", "origin"]
+push = "working"
+push-bookmark-prefix = "work/"
+
+[experimental-advance-branches]
+enabled-branches = ["glob:work/*"]
+
+[aliases]
+push = [
+  "git",
+  "push",
+  "--remote",
+  "working",
+  "--bookmark",
+  "glob:work/*",
+  "--allow-new",
+]

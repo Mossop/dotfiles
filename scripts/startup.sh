@@ -33,7 +33,7 @@ alias ls="ls --color"
 export LESS="FRSX"
 unset MAILCHECK
 
-export JJ_CONFIG="$DOTFILES/shared/jj/config.toml"
+export JJ_CONFIG="$DOTFILES/shared/jj"
 
 maybe_source "$PLATFORM_DIR/startup.sh"
 
