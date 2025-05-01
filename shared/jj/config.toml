@@ -18,10 +18,18 @@ context = 8
 merge-editor = "vscode"
 pager = "less -FRX"
 diff.format = "git"
+diff-editor = "meld"
+
+[aliases]
+br = ["util", "exec", "--", "jj-bookmark-rebase"]
 
 [revset-aliases]
 "branch()" = "branch(@)"
 "branch(x)" = "(::x | x::) & mutable()"
+"base()" = "base(@)"
+"base(x)" = "roots(::x & mutable())"
+"branch_point()" = "branch_point(@)"
+"branch_point(x)" = "heads(::x & immutable())"
 
 [experimental-advance-branches]
 enabled-branches = ["glob:*"]

@@ -1,0 +1,20 @@
+#! /bin/bash
+
+BOOKMARK="${1:-main}"
+
+OPERATIONS=`jj op log --no-graph --at-op=@ --ignore-working-copy -T 'id ++ ":" ++ description ++ "\n"' | grep -A 1 -m 1 ":fetch from git remote" | sed -e 's/:.*$//g' | xargs echo`
+read _ PARENT <<< "$OPERATIONS"
+OLD_COMMIT=`jj log --at-op=${PARENT} --ignore-working-copy -r ${BOOKMARK} --no-graph -T 'commit_id'`
+NEW_COMMIT=`jj log --at-op=@ --ignore-working-copy -r ${BOOKMARK} --no-graph -T 'commit_id'`
+
+if [ "$OLD_COMMIT" == "$NEW_COMMIT" ]; then
+  exit
+fi
+
+CHANGES=`jj log --ignore-working-copy -r "${OLD_COMMIT}+ & mutable()" --no-graph -T 'change_id'`
+
+if [ -z "$CHANGES" ]; then
+  exit
+fi
+
+jj rebase --skip-emptied -s "all:${OLD_COMMIT}+ & mutable()" -d ${BOOKMARK}
