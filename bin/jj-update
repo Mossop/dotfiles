@@ -1,0 +1,21 @@
+#! /bin/bash
+
+set -e
+
+BOOKMARK="${1:-trunk()}"
+
+OLD_COMMIT=`jj log --ignore-working-copy -r "${BOOKMARK}" --no-graph -T 'commit_id'`
+jj git fetch
+NEW_COMMIT=`jj log --ignore-working-copy -r "${BOOKMARK}" --no-graph -T 'commit_id'`
+
+if [ "$OLD_COMMIT" == "$NEW_COMMIT" ]; then
+  exit
+fi
+
+CHANGES=`jj log --ignore-working-copy -r "${OLD_COMMIT}+ & mutable()" --no-graph -T 'change_id'`
+
+if [ -z "$CHANGES" ]; then
+  exit
+fi
+
+jj rebase --skip-emptied -s "all:${OLD_COMMIT}+ & mutable()" -d ${BOOKMARK}
