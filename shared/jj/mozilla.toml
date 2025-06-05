@@ -2,16 +2,13 @@
   "~/mozilla/source",
   "E:/mozilla/source",
   "/e/mozilla/source",
+  "C:/Users/Dave/mozilla/source",
+  "/c/Users/Dave/mozilla/source",
 ]
 
 [revset-aliases]
 "trunk()" = "main@origin"
-
-#[core]
-#fsmonitor = "watchman"
-
-[core.watchman]
-register-snapshot-trigger = true
+"work()" = "((mutable() ~ empty()) | ::remote_bookmarks(glob:'work/*', 'working')) ~ ::remote_bookmarks(glob:'*', 'origin')"
 
 [git]
 fetch = ["working", "origin"]
@@ -31,3 +28,4 @@ push = [
   "glob:work/*",
   "--allow-new",
 ]
+work = ["log", "-r", "work()"]

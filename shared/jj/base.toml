@@ -2,9 +2,6 @@
 name = "Dave Townsend"
 email = "dtownsend@oxymoronical.com"
 
-#[core]
-#fsmonitor = "watchman"
-
 [colors]
 "diff token" = { underline = false }
 
