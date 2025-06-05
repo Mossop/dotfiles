@@ -1,7 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = '''$username[@](bold green)$hostname${custom.mozbuild}
-$git_branch$git_state$directory$character'''
+${custom.vcs}$directory$character'''
 
 [hostname]
 ssh_only = false
@@ -24,8 +24,15 @@ style = 'bold yellow'
 only_attached = true
 
 [custom.mozbuild]
+description = "MozillaBuild configuration"
 command = "$BUILD_BASE/bin/prompt"
 when = '[ ! -z "$BUILD_BASE" ]'
+style = 'bold yellow'
+
+[custom.vcs]
+description = "Version control status"
+command = "$DOTFILES/bin/vcs-prompt"
+when = true
 style = 'bold yellow'
 
 [character]

@@ -10,7 +10,7 @@ if [ -z "$DOTFILES_BASHRC_SOURCED" ]; then
   fi
 fi
 
-DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
+export DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
 
 if [[ $- == *i* ]]; then
   if [ -f "$HOME/.local/share/blesh/ble.sh" ]; then

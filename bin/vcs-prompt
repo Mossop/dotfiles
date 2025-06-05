@@ -1,0 +1,25 @@
+#! /bin/bash
+
+DIR=`pwd`
+
+# Loop over the current directory and its parents
+while [ "$DIR" != "/" ]; do
+  if [ -e "$DIR/.jj" ]; then
+    # REF=$(jj log --ignore-working-copy --no-graph -r @ -T 'change_id.short() ++ " " ++ bookmarks')
+    echo -n "[jj]"
+    exit 0
+  fi
+
+  if [ -d "$DIR/.git" ]; then
+    REF=$(git symbolic-ref --short -q HEAD || git rev-parse --short HEAD)
+    echo -n "[git:$REF]"
+    exit 0
+  fi
+
+  if [ -d "$DIR/.hg" ]; then
+    echo -n "[hg]"
+    exit 0
+  fi
+
+  DIR=$(dirname "$DIR")
+done
