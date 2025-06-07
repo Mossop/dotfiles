@@ -5,8 +5,9 @@ DIR=`pwd`
 # Loop over the current directory and its parents
 while [ "$DIR" != "/" ]; do
   if [ -e "$DIR/.jj" ]; then
-    # REF=$(jj log --ignore-working-copy --no-graph -r @ -T 'change_id.short() ++ " " ++ bookmarks')
-    echo -n "[jj]"
+    TEMPLATE='separate(":", "jj", coalesce(local_bookmarks, remote_bookmarks, change_id.short()))'
+    REF=$(jj log --no-pager --no-graph --ignore-working-copy -r 'heads(..@ & immutable())' -T "$TEMPLATE")
+    echo -n "[$REF]"
     exit 0
   fi
 
