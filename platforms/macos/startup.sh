@@ -1,8 +1,12 @@
 if command -v brew 1>/dev/null 2>&1; then
   PREFIX=$(brew --prefix)
-  for PACKAGE in gnu-which findutils gnu-sed gnu-tar grep coreutils
+  for PACKAGE in gnu-which findutils gnu-sed make gnu-tar grep coreutils
   do
     add_path "${PREFIX}/opt/${PACKAGE}/libexec/gnubin"
+  done
+  for PACKAGE in gnu-getopt util-linux
+  do
+    add_path "${PREFIX}/opt/${PACKAGE}/bin"
   done
 
   add_path "${PREFIX}/opt/curl/bin"
