@@ -17,4 +17,4 @@ if [ -z "$CHANGES" ]; then
   exit
 fi
 
-jj rebase --skip-emptied -s "all:${OLD_COMMIT}+ & mutable()" -d ${BOOKMARK}
+jj rebase --skip-emptied -s "${OLD_COMMIT}+ & mutable()" -d ${BOOKMARK}
