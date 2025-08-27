@@ -13,6 +13,8 @@
 [git]
 fetch = ["working", "origin"]
 push = "working"
+
+[templates]
 push-bookmark-prefix = "work/"
 
 [experimental-advance-branches]
