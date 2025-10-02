@@ -34,6 +34,7 @@ export LESS="FRSX"
 unset MAILCHECK
 
 export JJ_CONFIG="$DOTFILES/shared/jj"
+export MISE_CONFIG_DIR="$DOTFILES/shared/mise"
 
 maybe_source "$PLATFORM_DIR/startup.sh"
 
