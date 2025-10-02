@@ -3,6 +3,11 @@
 set -e
 
 . "$DOTFILES/includes/config.sh"
+. "$DOTFILES/includes/functions.sh"
+
+cd $DOTFILES/home && find . -type f -print0 | $(cd $HOME && xargs -0 rm)
+cd $PLATFORM_DIR/home && find . -type f -print0 | $(cd $HOME && xargs -0 rm)
+cd $DOTFILES
 
 if [ -d "$DOTFILES/.git" ]; then
   if [ -f "$HOME/.ssh/id_rsa_github" ]; then
