@@ -23,8 +23,5 @@ update = ["util", "exec", "--", "jj-update"]
 "branch_point()" = "branch_point(@)"
 "branch_point(x)" = "heads(::x & immutable())"
 
-[experimental-advance-branches]
-enabled-branches = ["glob:*"]
-
 [git]
 subprocess = true
