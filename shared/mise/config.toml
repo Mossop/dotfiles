@@ -2,3 +2,10 @@
 experimental = true
 python.uv_venv_auto = true
 status.show_tools = true
+
+[settings.cargo]
+binstall = true
+
+[tools]
+"cargo:jj-cli" = "latest"
+"cargo-binstall" = "latest"
