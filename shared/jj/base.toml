@@ -14,6 +14,7 @@ diff-editor = "meld"
 [aliases]
 br = ["util", "exec", "--", "jj-bookmark-rebase"]
 update = ["util", "exec", "--", "jj-update"]
+push = ["git", "push", "--tracked", "--deleted"]
 
 [revset-aliases]
 "branch()" = "branch(@)"

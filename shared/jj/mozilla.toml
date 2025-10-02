@@ -5,6 +5,9 @@
   "C:/Users/Dave/mozilla/source",
 ]
 
+[revsets]
+log = "present(@) | ancestors(immutable_heads().., 2) | present(trunk()) | present(enterprise-main@enterprise)"
+
 [revset-aliases]
 "trunk()" = "main@origin"
 "work()" = "((mutable() ~ empty()) | ::remote_bookmarks(glob:'work/*', 'working')) ~ ::remote_bookmarks(glob:'*', 'origin')"
