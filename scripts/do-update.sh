@@ -17,7 +17,18 @@ if [ -d "$DOTFILES/.git" ]; then
       git -C "$DOTFILES" remote set-url origin "git@github.com:${DOTFILES_REPO}.git"
     fi
   fi
-  git -C "$DOTFILES" pull -q origin $DOTFILES_BRANCH
+
+  if [ -d "$DOTFILES/.jj" ]; then
+    cd $DOTFILES
+    $DOTFILES/bin/jj-update $DOTFILES_BRANCH
+  else
+    git -C "$DOTFILES" pull -q origin $DOTFILES_BRANCH
+
+    if command -v jj 1>/dev/null 2>&1; then
+      jj --quiet git init $DOTFILES
+      jj --quiet -R $DOTFILES bookmark track $DOTFILES_BRANCH@origin
+    fi
+  fi
 elif command -v git 1>/dev/null 2>&1; then
   if [ -f "$HOME/.ssh/id_rsa_github" ]; then
     git clone -q --bare -b $DOTFILES_BRANCH "git@github.com:${DOTFILES_REPO}.git" "$DOTFILES/.git"
@@ -28,6 +39,11 @@ elif command -v git 1>/dev/null 2>&1; then
   rm -f "$DOTFILES/.git/config.bak"
   git -C "$DOTFILES" checkout -q -f $DOTFILES_BRANCH
   git -C "$DOTFILES" reset -q --hard $DOTFILES_BRANCH
+
+  if command -v jj 1>/dev/null 2>&1; then
+    jj --quiet git init $DOTFILES
+    jj --quiet -R $DOTFILES bookmark track $DOTFILES_BRANCH@origin
+  fi
 else
   if ! command -v tar 1>/dev/null 2>&1; then
     echo "tar is not installed, cannot proceed."
