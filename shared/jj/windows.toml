@@ -1,0 +1,5 @@
+--when.platforms = ["windows"]
+
+[aliases]
+br = ["util", "exec", "--", "C:\\mozilla-build\\msys2\\usr\\bin\\bash.exe", "jj-bookmark-rebase"]
+update = ["util", "exec", "--", "C:\\mozilla-build\\msys2\\usr\\bin\\bash.exe", "jj-update"]
