@@ -5,8 +5,8 @@ set -e
 . "$DOTFILES/includes/config.sh"
 . "$DOTFILES/includes/functions.sh"
 
-cd $DOTFILES/home && find . -type f -print0 | $(cd $HOME && xargs -0 rm)
-cd $PLATFORM_DIR/home && find . -type f -print0 | $(cd $HOME && xargs -0 rm)
+cd $DOTFILES/home && find . -type f -print0 | $(cd $HOME && xargs -0 rm -f)
+cd $PLATFORM_DIR/home && find . -type f -print0 | $(cd $HOME && xargs -0 rm -f)
 cd $DOTFILES
 
 if [ -d "$DOTFILES/.git" ]; then
@@ -19,8 +19,7 @@ if [ -d "$DOTFILES/.git" ]; then
   fi
 
   if [ -d "$DOTFILES/.jj" ]; then
-    cd $DOTFILES
-    $DOTFILES/bin/jj-update $DOTFILES_BRANCH
+    JJ_WORKSPACE_ROOT=$DOTFILES $DOTFILES/bin/jj-update $DOTFILES_BRANCH
   else
     git -C "$DOTFILES" pull -q origin $DOTFILES_BRANCH
 

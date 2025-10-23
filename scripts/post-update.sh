@@ -7,3 +7,6 @@ mkdir -p "$DOTFILES/external"
 
 rm -f "$TMPFILE"
 exec "$DOTFILES/install"
+
+mise self-update
+mise upgrade
