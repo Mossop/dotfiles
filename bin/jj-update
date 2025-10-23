@@ -5,7 +5,7 @@ set -e
 BOOKMARK="${1:-trunk()}"
 
 OLD_COMMIT=`jj -R $JJ_WORKSPACE_ROOT log --ignore-working-copy -r "${BOOKMARK}" --no-graph -T 'commit_id'`
-jj git fetch
+jj -R $JJ_WORKSPACE_ROOT git fetch
 NEW_COMMIT=`jj -R $JJ_WORKSPACE_ROOT log --ignore-working-copy -r "${BOOKMARK}" --no-graph -T 'commit_id'`
 
 if [ "$OLD_COMMIT" == "$NEW_COMMIT" ]; then
