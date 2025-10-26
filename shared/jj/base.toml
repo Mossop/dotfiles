@@ -15,6 +15,7 @@ diff-editor = "meld"
 br = ["util", "exec", "--", "jj-bookmark-rebase"]
 update = ["util", "exec", "--", "jj-update"]
 push = ["git", "push", "--tracked", "--deleted"]
+tug = ["bookmark", "move", "--from", "heads(::@ & bookmarks())", "--to", "heads(::@ ~ description(exact:''))"]
 
 [revset-aliases]
 "branch()" = "branch(@)"
