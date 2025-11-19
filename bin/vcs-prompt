@@ -1,26 +1,25 @@
 #! /bin/bash
 
 DIR=`pwd`
+BASE=""
 
 # Loop over the current directory and its parents
 while [ "$DIR" != "/" ]; do
   if [ -e "$DIR/.jj" ]; then
-    TEMPLATE='separate(":", "jj", coalesce(local_bookmarks, remote_bookmarks, change_id.short()))'
-    REF=$(jj log --no-pager --no-graph --ignore-working-copy -r 'heads(..@ & immutable())' -T "$TEMPLATE")
-    echo -n "[$REF]"
+    echo -n "[jj$BASE]"
     exit 0
   fi
 
   if [ -d "$DIR/.git" ]; then
-    REF=$(git symbolic-ref --short -q HEAD || git rev-parse --short HEAD)
-    echo -n "[git:$REF]"
+    echo -n "[git$BASE]"
     exit 0
   fi
 
   if [ -d "$DIR/.hg" ]; then
-    echo -n "[hg]"
+    echo -n "[hg$BASE]"
     exit 0
   fi
 
   DIR=$(dirname "$DIR")
+  BASE=":$(basename "$DIR")"
 done
