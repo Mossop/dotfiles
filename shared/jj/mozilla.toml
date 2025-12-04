@@ -31,13 +31,11 @@ push-bookmark-prefix = "work/"
 enabled-branches = ["glob:work/*"]
 
 [aliases]
-push = [
-  "git",
-  "push",
-  "--remote",
-  "working",
-  "--bookmark",
-  "glob:work/*",
-  "--allow-new",
-]
+push = ["git", "push", "--remote", "working", "--tracked"]
 work = ["log", "-r", "work()"]
+
+[remotes.working]
+auto-track-bookmarks = "glob:'work/*'"
+
+[remotes.enterprise]
+auto-track-bookmarks = "glob:'mossop/*'"

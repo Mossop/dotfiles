@@ -7,7 +7,6 @@ context = 8
 
 [ui]
 merge-editor = "vscode"
-pager = "less -FRX"
 diff-formatter = ":git"
 diff-editor = "meld"
 
@@ -15,7 +14,14 @@ diff-editor = "meld"
 br = ["util", "exec", "--", "jj-bookmark-rebase"]
 update = ["util", "exec", "--", "jj-update"]
 push = ["git", "push", "--tracked", "--deleted"]
-tug = ["bookmark", "move", "--from", "heads(::@ & bookmarks())", "--to", "heads(::@ ~ description(exact:''))"]
+tug = [
+  "bookmark",
+  "move",
+  "--from",
+  "heads(::@ & bookmarks())",
+  "--to",
+  "heads(::@ ~ description(exact:''))",
+]
 
 [revset-aliases]
 "branch()" = "branch(@)"
@@ -26,4 +32,4 @@ tug = ["bookmark", "move", "--from", "heads(::@ & bookmarks())", "--to", "heads(
 "branch_point(x)" = "heads(::x & immutable())"
 
 [git]
-subprocess = true
+track-default-bookmark-on-clone = false
