@@ -84,6 +84,10 @@ if [[ $- == *i* ]]; then
     export ATUIN_CONFIG_DIR="$DOTFILES/shared/atuin"
     eval "$($HOME/.atuin/bin/atuin init bash)"
   fi
+
+  if command -v jj 1>/dev/null 2>&1; then
+    source <(jj util completion bash)
+  fi
 fi
 
 clean_path
