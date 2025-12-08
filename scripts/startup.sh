@@ -12,12 +12,6 @@ fi
 
 export DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]:-$0}") && cd .. && pwd | sed -e s/\\/$//g)
 
-if [[ $- == *i* ]]; then
-  if [ -f "$HOME/.local/share/blesh/ble.sh" ]; then
-    . "$HOME/.local/share/blesh/ble.sh" --noattach --rcfile "$DOTFILES/shared/blesh.rc"
-  fi
-fi
-
 . "$DOTFILES/includes/functions.sh"
 . "$DOTFILES/includes/config.sh"
 
@@ -74,15 +68,6 @@ if [[ $- == *i* ]]; then
     if [ -z "$VSCODE_SHELL_INTEGRATION" ]; then
       . "$($VSCODE --locate-shell-integration-path bash)"
     fi
-  fi
-
-  if [ -n "$HOME/.local/share/blesh/ble.sh" ]; then
-    [[ ! ${BLE_VERSION-} ]] || ble-attach
-  fi
-
-  if [ -x "$HOME/.atuin/bin/atuin" ]; then
-    export ATUIN_CONFIG_DIR="$DOTFILES/shared/atuin"
-    eval "$($HOME/.atuin/bin/atuin init bash)"
   fi
 
   if command -v jj 1>/dev/null 2>&1; then
