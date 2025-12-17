@@ -4,7 +4,7 @@ if [ -f "/c/mozilla-build/msys2/usr/bin/ssh.exe" ]; then
   export GIT_SSH="C:\\mozilla-build\\msys2\\usr\\bin\\ssh.exe"
 fi
 
-if [ -f "$HOME/bin/direnv.exe" ]; then
+if command -v direnv 1>/dev/null 2>&1; then
   export _unmangle_direnv_names="PATH"
   _unmangle_direnv_paths() {
     for k in $_unmangle_direnv_names; do
