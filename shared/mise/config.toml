@@ -9,4 +9,4 @@ binstall = true
 [tools]
 "cargo:jj-cli" = "latest"
 "cargo-binstall" = "latest"
-"cargo:cargo-outdated" = "latest"
+"cargo:starship" = "latest"
