@@ -48,7 +48,7 @@ Host madras
 Host ap1 ap2
   User admin
 
-Host korma korma-win korma-linux
+Host korma korma-win korma-linux vindaloo-win vindaloo-linux
   User dave
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_mozilla.pub"
   IdentitiesOnly yes
@@ -58,6 +58,12 @@ Host korma-win
 
 Host korma-linux
   HostName korma-linux.home.clantownsend.com
+
+Host vindaloo-win
+  HostName vindaloo-win.home.clantownsend.com
+
+Host vindaloo-linux
+  HostName vindaloo-linux.home.clantownsend.com
 
 Host tikka madras ap1 ap2 ap3
   IdentityFile "~/dotfiles/shared/ssh/id_rsa_personal.pub"
