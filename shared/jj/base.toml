@@ -23,6 +23,9 @@ tug = [
   "heads(::@ ~ description(exact:''))",
 ]
 
+[revsets]
+"log" = "present(@) | present(trunk()) | ancestors(mutable(), 2)"
+
 [revset-aliases]
 "branch()" = "branch(@)"
 "branch(x)" = "(::x | x::) & mutable()"
@@ -33,3 +36,6 @@ tug = [
 
 [git]
 track-default-bookmark-on-clone = false
+
+[experimental-advance-branches]
+enabled-branches = ["glob:*"]
