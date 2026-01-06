@@ -18,4 +18,4 @@ if [ -z "$CHANGES" ]; then
   exit
 fi
 
-jj -R $JJ_WORKSPACE_ROOT rebase --skip-emptied -s "${OLD_COMMIT}+ & mutable()" -d ${BOOKMARK}
+jj -R $JJ_WORKSPACE_ROOT rebase --skip-emptied -s "${OLD_COMMIT}+ & mutable()" --onto ${BOOKMARK}

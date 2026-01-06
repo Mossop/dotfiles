@@ -25,7 +25,7 @@ push = "working"
 push-bookmark-prefix = "work/"
 
 [experimental-advance-branches]
-enabled-branches = ["glob:work/*"]
+enabled-branches = ["glob:'work/*'"]
 
 [aliases]
 work = ["log", "-r", "work()"]
