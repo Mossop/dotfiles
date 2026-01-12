@@ -52,7 +52,16 @@ export VISUAL="$EDITOR"
 
 if command -v mise 1>/dev/null 2>&1; then
   if [[ $- == *i* ]]; then
-    eval "$(mise activate bash)"
+    if [[ $DOTFILES_PLATFORM == "windows" ]]; then
+      __fix_path() {
+        export PATH="$(/usr/bin/cygpath -u -p "$(echo $PATH | /usr/bin/sed -e 's|^C:||')")"
+      }
+      export -f __fix_path
+      export __MISE_ORIG_PATH=`cygpath -w -p "$PATH"`
+      eval "$($HOME/mise/target/debug/mise activate bash | sed 's|eval "$(mise hook-env -s bash)";|& __fix_path;|')"
+    else
+      eval "$(mise activate bash)"
+    fi
   else
     eval "$(mise activate bash --shims)"
   fi
@@ -74,6 +83,8 @@ if [[ $- == *i* ]]; then
     source <(jj util completion bash)
   fi
 fi
+
+maybe_source "$PLATFORM_DIR/post_startup.sh"
 
 clean_path
 clean_up
