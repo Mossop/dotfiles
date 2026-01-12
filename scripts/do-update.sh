@@ -1,13 +1,17 @@
 #! /bin/bash
 
-set -e
-
 . "$DOTFILES/includes/config.sh"
 . "$DOTFILES/includes/functions.sh"
 
 cd $DOTFILES/home && find . -type f -print0 | $(cd $HOME && xargs -0 rm -f)
 cd $PLATFORM_DIR/home && find . -type f -print0 | $(cd $HOME && xargs -0 rm -f)
 cd $DOTFILES
+
+set -e
+
+if [ -f "$PLATFORM_DIR/home/.ssh/config" ]; then
+  cp $PLATFORM_DIR/home/.ssh/config $HOME/.ssh
+fi
 
 if [ -d "$DOTFILES/.git" ]; then
   if [ -f "$HOME/.ssh/id_rsa_github" ]; then
