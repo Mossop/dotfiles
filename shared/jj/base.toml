@@ -24,7 +24,7 @@ tug = [
 ]
 
 [revsets]
-"log" = "present(@) | present(trunk()) | ancestors(mutable(), 2)"
+"log" = "present(@) | ancestors(mutable(), 2)"
 
 [revset-aliases]
 "branch()" = "branch(@)"

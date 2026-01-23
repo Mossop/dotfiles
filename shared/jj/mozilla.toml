@@ -5,33 +5,9 @@
   "C:/Users/Dave/mozilla/source",
 ]
 
-[revset-aliases]
-"trunk()" = "main@origin"
-"work()" = "((mutable() ~ empty()) | ::remote_bookmarks(glob:'work/*', 'working')) ~ ::remote_bookmarks(glob:'*', 'origin')"
-"immutable_heads()" = '''
-  builtin_immutable_heads()
-  | remote_bookmarks(exact:'autoland')
-  | remote_bookmarks(exact:'beta')
-  | remote_bookmarks(regex:'^esr\d+$')
-  | remote_bookmarks(exact:'release')
-  | remote_bookmarks(exact:'enterprise-main')
-'''
-
 [git]
-fetch = ["working", "origin"]
-push = "working"
+fetch = ["origin"]
+push = "origin"
 
-[templates]
-push-bookmark-prefix = "work/"
-
-[experimental-advance-branches]
-enabled-branches = ["glob:'work/*'"]
-
-[aliases]
-work = ["log", "-r", "work()"]
-
-[remotes.working]
+[remotes.origin]
 auto-track-bookmarks = "glob:'work/*'"
-
-[remotes.enterprise]
-auto-track-bookmarks = "glob:'mossop/*'"
