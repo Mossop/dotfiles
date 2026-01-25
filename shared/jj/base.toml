@@ -38,4 +38,4 @@ tug = [
 track-default-bookmark-on-clone = false
 
 [experimental-advance-branches]
-enabled-branches = ["glob:'*'"]
+enabled-branches = ["*"]
