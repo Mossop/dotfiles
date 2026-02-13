@@ -8,7 +8,7 @@ context = 8
 [ui]
 merge-editor = "vscode"
 diff-formatter = ":git"
-diff-editor = "meld"
+diff-editor = "vscode"
 
 [aliases]
 br = ["util", "exec", "--", "jj-bookmark-rebase"]
@@ -22,6 +22,13 @@ tug = [
   "--to",
   "heads(::@ ~ description(exact:''))",
 ]
+work = ["log", "--ignore-working-copy", "-r", "patches()::"]
+current = [
+  "log",
+  "--ignore-working-copy",
+  "-r",
+  "ancestors(::@ & mutable(), 2)",
+]
 
 [revsets]
 "log" = "present(@) | ancestors(mutable(), 2)"
@@ -33,6 +40,7 @@ tug = [
 "base(x)" = "roots(::x & mutable())"
 "branch_point()" = "branch_point(@)"
 "branch_point(x)" = "heads(::x & immutable())"
+"patches()" = "mutable() & mine() & ~empty()"
 
 [git]
 track-default-bookmark-on-clone = false
