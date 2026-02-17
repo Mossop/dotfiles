@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Sends a webhook when Claude has been waiting for 30 seconds for a response.
+#
+# Add to ~/.claude/settings.json:
+# "hooks": {
+#   "Stop": [
+#     {
+#       "hooks": [
+#         {
+#           "type": "command",
+#           "command": "$HOME/dotfiles/bin/claude-notify <webhook url>",
+#           "async": true,
+#           "timeout": 300
+#         }
+#       ]
+#     }
+#   ],
+#   "Notification": [
+#     {
+#       "matcher": "idle_prompt",
+#       "hooks": [
+#         {
+#           "type": "command",
+#           "command": "$HOME/dotfiles/bin/claude-notify <webhook url>",
+#           "async": true,
+#           "timeout": 300
+#         }
+#       ]
+#     },
+#     {
+#       "matcher": "permission_prompt",
+#       "hooks": [
+#         {
+#           "type": "command",
+#           "command": "$HOME/dotfiles/bin/claude-notify <webhook url>",
+#           "async": true,
+#           "timeout": 300
+#         }
+#       ]
+#     }
+#   ]
+# }
+
+# Read hook input from stdin
+INPUT=$(cat)
+
+# Extract information
+TRANSCRIPT_PATH=$(echo "$INPUT" | jq -r '.transcript_path')
+NOTIFICATION_TYPE=$(echo "$INPUT" | jq -r '.notification_type // "stop"')
+HOOK_EVENT=$(echo "$INPUT" | jq -r '.hook_event_name')
+WEBHOOK=$1
+
+# Record when we started
+START_TIME=$(date +%s)
+
+# Wait to see if I respond locally
+# Use different delays based on event type
+if [ "$HOOK_EVENT" = "Stop" ]; then
+  SLEEP_DURATION=30
+else
+  SLEEP_DURATION=25
+fi
+
+sleep $SLEEP_DURATION
+
+# Check if transcript was modified since we started
+LAST_MODIFIED=$(stat -c "%Y" "$TRANSCRIPT_PATH" 2>/dev/null)
+
+if [ "$LAST_MODIFIED" -le "$START_TIME" ]; then
+  # No new activity - send notification
+  SESSION_ID=$(echo "$INPUT" | jq -r '.session_id')
+  PROJECT=$(echo "$INPUT" | jq -r '.cwd' | xargs basename)
+  MESSAGE=$(echo "$INPUT" | jq -r '.message // "Claude finished responding"')
+
+  curl -q -X POST "$WEBHOOK" \
+    -H "Content-Type: application/json" \
+    -d "{
+      \"session_id\": \"$SESSION_ID\",
+      \"project\": \"$PROJECT\",
+      \"notification_type\": \"$NOTIFICATION_TYPE\",
+      \"hook_event\": \"$HOOK_EVENT\",
+      \"message\": \"$MESSAGE\"
+    }"
+fi
