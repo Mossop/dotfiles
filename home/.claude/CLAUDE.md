@@ -14,4 +14,8 @@ When you encounter an issue with the agreed-upon approach, DO NOT silently switc
 
 When the user redirects your approach or corrects your understanding of the problem, fully stop the current approach, acknowledge the correction, and restart from the user's framing. Do not continue pushing the previous approach or make partial pivots.
 
-Don't use sed, use your normal Edit tool
+Use your build in Edit tool for reading files, DO NOT use external tools to only read a file's contents.
+
+When reverting commits in jj or git prefer to revert on top of the existing commits rather than `git reset` or `jj abandon`.
+
+Where possible use `jq` to parse and analyse json files in preference to custom python scripts as it is safer.
