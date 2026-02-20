@@ -22,13 +22,8 @@ tug = [
   "--to",
   "heads(::@ ~ description(exact:''))",
 ]
-work = ["log", "--ignore-working-copy", "-r", "patches()::"]
-current = [
-  "log",
-  "--ignore-working-copy",
-  "-r",
-  "ancestors(::@ & mutable(), 2)",
-]
+work = ["log", "--template", "simple", "-r", "patches()::"]
+current = ["log", "--template", "simple", "-r", "ancestors(::@ & mutable(), 2)"]
 
 [revsets]
 "log" = "present(@) | ancestors(mutable(), 2)"
@@ -47,3 +42,34 @@ track-default-bookmark-on-clone = false
 
 [experimental-advance-branches]
 enabled-branches = ["*"]
+
+[colors]
+immutable = "ansi-color-8"
+
+[templates]
+log = "simple"
+
+[template-aliases]
+simple = "simple(self)"
+"simple(commit)" = """
+label(
+  separate(" ",
+    if(commit.current_working_copy(), "working_copy"),
+    if(commit.immutable(), "immutable", "mutable"),
+    if(commit.conflict(), "conflicted"),
+  ),
+  separate(" ",
+    format_short_change_id_with_change_offset(commit),
+    format_short_commit_id(commit.commit_id()),
+    if(commit.empty(), empty_commit_marker),
+    if(commit.description(),
+      truncate_end(70, commit.description().first_line(), "…"),
+      label(if(commit.empty(), "empty"), description_placeholder),
+    ),
+    commit.bookmarks(),
+    commit.tags(),
+    commit.working_copies(),
+    format_commit_labels(commit),
+  ) ++ "\n",
+)
+"""
