@@ -19,3 +19,7 @@ Use your build in Edit tool for reading files, DO NOT use external tools to only
 When reverting commits in jj or git prefer to revert on top of the existing commits rather than `git reset` or `jj abandon`.
 
 Where possible use `jq` to parse and analyse json files in preference to custom python scripts as it is safer.
+
+In JavaScript prefer to use == over === unless absolutely necessary.
+
+In JavaScript prefer to use let declarations over const unless declaring a top level value that is based on a magic number or string of some kind.
