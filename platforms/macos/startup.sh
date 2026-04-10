@@ -10,6 +10,11 @@ if command -v brew 1>/dev/null 2>&1; then
   done
 
   add_path "${PREFIX}/opt/curl/bin"
+
+  if [ -d "${PREFIX}/share/android-commandlinetools" ]; then
+    export ANDROID_HOME="${PREFIX}/share/android-commandlinetools"
+    add_path "${ANDROID_HOME}/platform-tools"
+  fi
 fi
 
 add_path "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
