@@ -11,3 +11,12 @@ push = "origin"
 
 [remotes.origin]
 auto-track-bookmarks = "glob:'work/*'"
+
+[aliases]
+closed = ["util", "exec", "--", "bash", "-c", """
+jj abandon -r "subject(regex-i:\\"^bug $1\\\\\\b\\") & mine() & mutable()"
+""", ""]
+
+[revset-aliases]
+"bug(x)" = 'subject(regex-i:"^bug \\d{0,7}\\b") & subject(substring:x)'
+"wip(x)" = "bug(x) & mine() & mutable()"
