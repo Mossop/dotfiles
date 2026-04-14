@@ -1,3 +1,4 @@
 #! /bin/bash
 
-ssh -t $1 'tmux -u -CC new -A -s main'
+SESSION=${1:-main}
+exec tmux new -A -s "$SESSION"
