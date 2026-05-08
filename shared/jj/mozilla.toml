@@ -1,8 +1,10 @@
 --when.repositories = [
   "~/mozilla/source",
+  "~/firefox/source",
   "E:/mozilla/source",
+  "E:/mozilla-source/source",
   "F:/mozilla/source",
-  "C:/Users/Dave/mozilla/source",
+  "F:/mozilla-source/source",
 ]
 
 [git]
