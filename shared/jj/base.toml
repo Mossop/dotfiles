@@ -63,7 +63,7 @@ label(
     format_short_commit_id(commit.commit_id()),
     if(commit.empty(), empty_commit_marker),
     if(commit.description(),
-      truncate_end(70, commit.description().first_line(), "…"),
+      truncate_end(100, commit.description().first_line(), "…"),
       label(if(commit.empty(), "empty"), description_placeholder),
     ),
     commit.bookmarks(),
