@@ -1,6 +1,6 @@
 [settings]
 experimental = true
-python.uv_venv_auto = true
+python.uv_venv_auto = "create|source"
 status.show_tools = true
 
 [settings.cargo]

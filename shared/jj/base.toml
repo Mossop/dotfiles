@@ -24,6 +24,9 @@ tug = [
 ]
 work = ["log", "--template", "simple", "-r", "patches()::"]
 current = ["log", "--template", "simple", "-r", "ancestors(::@ & mutable(), 2)"]
+bdiff = ["diff", "--from", "branch_point(@)", "--to", "@"]
+bstat = ["diff", "--stat", "--from", "branch_point(@)", "--to", "@"]
+stat = ["diff", "--stat"]
 
 [revsets]
 "log" = "present(@) | ancestors(mutable(), 2)"
