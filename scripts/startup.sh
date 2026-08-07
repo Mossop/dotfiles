@@ -27,6 +27,7 @@ alias ls="ls --color"
 export LESS="FRSX"
 unset MAILCHECK
 
+export GIT_CONFIG_GLOBAL="$DOTFILES/shared/git/gitconfig"
 export JJ_CONFIG="$DOTFILES/shared/jj"
 export MISE_CONFIG_DIR="$DOTFILES/shared/mise"
 
