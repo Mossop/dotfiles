@@ -27,6 +27,9 @@ current = ["log", "--template", "simple", "-r", "ancestors(::@ & mutable(), 2)"]
 bdiff = ["diff", "--from", "branch_point(@)", "--to", "@"]
 bstat = ["diff", "--stat", "--from", "branch_point(@)", "--to", "@"]
 stat = ["diff", "--stat"]
+lrv = ["util", "exec", "--", "bash", "-c", """
+exec lrv --cmd "jj diff $*"
+""", ""]
 
 [revsets]
 "log" = "present(@) | ancestors(mutable(), 2)"

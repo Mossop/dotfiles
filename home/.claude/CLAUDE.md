@@ -1,25 +1,30 @@
-# Important rules to follow in all projects
+# Global rules
 
-Most projects use mise to run tasks, prefer using mise tasks when available instead of npm and cargo.
+## Build & tooling
 
-Do not change directory when running tools as direnv or mise may cause you end up with unexpected environment variables in scope. Instead prefer passing target directories to commands instead of changing the directory to run the command. If changing directory is absolutely necessary, do it in a subshell.
+- If a `mise.toml` is present, use mise tasks instead of npm/cargo directly. Run `mise tasks` to see what is available.
+- Don't `cd`. direnv and mise change the environment per-directory, so you end up with unexpected env vars in scope. Pass the target directory to the command instead. If you genuinely must cd, do it in a subshell.
+- Use the Read tool to read files — not `cat`, `sed`, `head`, or `tail`.
+- Use `jq` to query JSON rather than writing a throwaway Python script.
 
-DO NOT change the visibility of things in Rust without asking.
+## Version control
 
-When the user asks a question about why you took a particular approach just explain why. The user may agree with your reasoning. DO NOT start to make changes unless explicitly asked.
+- Revert by committing a revert on top of existing history. Never `git reset` or `jj abandon`.
 
-When implementing a fix or feature, start with the simplest possible approach. Do not over-engineer solutions, add unnecessary abstractions, or introduce extra code (like #[ignore] annotations, CI workarounds, or infrastructure wrappers) that the user didn't ask for. If the first approach doesn't work, explain what failed and propose the next simplest option.
+## Rust
 
-When you encounter an issue with the agreed-upon approach, DO NOT silently switch to a different approach. Stop and tell the user what went wrong and propose alternatives. Never silently change the implementation strategy.
+- Never widen visibility (`pub`, `pub(crate)`) without asking — that is a public API change.
 
-When the user redirects your approach or corrects your understanding of the problem, fully stop the current approach, acknowledge the correction, and restart from the user's framing. Do not continue pushing the previous approach or make partial pivots.
+## JavaScript
 
-Use your build in Edit tool for reading files, DO NOT use external tools to only read a file's contents.
+- Prefer `==` over `===` unless the coercion actually matters.
+- Use `const` only for module-level constants (a magic number or string). Use `let`
+  everywhere else.
 
-When reverting commits in jj or git prefer to revert on top of the existing commits rather than `git reset` or `jj abandon`.
+## Working with me
 
-Where possible use `jq` to parse and analyse json files in preference to custom python scripts as it is safer.
-
-In JavaScript prefer to use == over === unless absolutely necessary.
-
-In JavaScript prefer to use let declarations over const unless declaring a top level value that is based on a magic number or string of some kind.
+- I prefer you to be more collaborative than self directed. Don't try to go above and beyond the specific thing that I asked you to do.
+- Start with the simplest thing that works. No extra abstractions, no `#[ignore]` annotations, no CI workarounds or infrastructure wrappers I didn't ask for. If the simple approach fails, tell me what failed and propose the next simplest option.
+- If we agreed on a plan and you find it won't work, stop and tell me before writing code — don't substitute a different approach.
+- When I correct you, drop the previous approach entirely and restart from my framing. No partial pivots.
+- When I ask why you did something, just answer. Don't start editing.
