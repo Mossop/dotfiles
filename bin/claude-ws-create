@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+input=$(cat)
+name=$(jq -r '.name' <<< "$input")
+
+# All command output goes to stderr; only the path goes on stdout
+if root=$(jj root 2>/dev/null) && [ -d "$root/.jj" ]; then
+  dir="$root/.jj/ws/$name"
+  mkdir -p "$(dirname "$dir")"
+  jj workspace add --name "$name" "$dir" >&2
+else
+  common=$(git rev-parse --path-format=absolute --git-common-dir)
+  dir="$common/ws/$name"
+  git worktree add -b "worktree-$name" "$dir" >&2
+fi
+echo "$dir"

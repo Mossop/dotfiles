@@ -1,0 +1,3 @@
+#! /bin/bash
+
+exec claude-wrapper remote-control --no-create-session-in-dir --spawn worktree

@@ -1,0 +1,11 @@
+#!/bin/bash
+input=$(cat)
+dir=$(jq -r '.worktree_path' <<< "$input")
+
+if [ -d "$dir/.jj" ]; then
+  name=$(basename "$dir" | sed 's/.*-//')
+  jj -R "${dir%/.jj/ws/*}" workspace forget "$name" && rm -rf "$dir"
+else
+  common=$(git -C "$dir" rev-parse --path-format=absolute --git-common-dir)
+  git --git-dir="$common" worktree remove --force "$dir"
+fi
