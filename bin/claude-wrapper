@@ -1,7 +1,16 @@
 #! /bin/sh
 
-if command -v mise 1>/dev/null 2>&1; then
-  exec mise exec -- claude $@
+if [[ -x "${1:-}" ]]; then
+  export CLAUDE_BINARY="$1"
+  shift
 else
-  exec claude $@
+  export CLAUDE_BINARY=$(which claude)
+fi
+
+if command -v mise 1>/dev/null 2>&1; then
+  CLAUDE=`mise exec -- bash -c 'echo ${CLAUDE_WRAPPER:-$CLAUDE_BINARY}'`
+  exec mise exec -- $CLAUDE $@
+else
+  CLAUDE=${CLAUDE_WRAPPER:-$CLAUDE_BINARY}
+  exec $CLAUDE $@
 fi
