@@ -1,0 +1,4 @@
+{{- $mozilla := promptBoolOnce . "mozilla" "Is this a Mozilla development machine" -}}
+
+[data]
+mozilla = {{ $mozilla }}

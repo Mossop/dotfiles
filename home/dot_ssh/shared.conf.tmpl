@@ -7,6 +7,7 @@ Host github.com
   IdentityFile "{{ .chezmoi.sourceDir | dir }}/shared/ssh/id_rsa_github.pub"
   IdentitiesOnly yes
 
+{{ if and (hasKey . "mozilla") .mozilla -}}
 # Mozilla servers
 Host hg.mozilla.org
   User dtownsend@mozilla.com
@@ -15,6 +16,7 @@ Host hg.mozilla.org
   IdentityFile "{{ .chezmoi.sourceDir | dir }}/shared/ssh/id_rsa_mozilla.pub"
   IdentitiesOnly yes
 
+{{ end -}}
 # Online servers
 
 Host bhuna

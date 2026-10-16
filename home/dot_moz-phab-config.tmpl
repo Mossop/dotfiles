@@ -1,3 +1,4 @@
+{{- if and (hasKey . "mozilla") .mozilla -}}
 {{- /* Preserve moz-phab's own record of when it last checked for updates. */ -}}
 {{- $lastCheck := "" -}}
 {{- $existing := joinPath .chezmoi.homeDir ".moz-phab-config" -}}
@@ -50,4 +51,4 @@ report_to_sentry = True
 
 [telemetry]
 enabled = True
-
+{{ end }}
