@@ -5,10 +5,15 @@
 - If a `mise.toml` is present, use mise tasks instead of npm/cargo directly. Run `mise tasks` to see what is available.
 - Don't `cd`. direnv and mise change the environment per-directory, so you end up with unexpected env vars in scope. Pass the target directory to the command instead. If you genuinely must cd, do it in a subshell.
 - Use the Read tool to read files — not `cat`, `sed`, `head`, or `tail`.
+- Use the Edit tool to modify files - don't write custom python scripts.
 - Use `jq` to query JSON rather than writing a throwaway Python script.
+- When I ask to review something with lrv you need to run lrv in the background and give me the url it prints out after opening as the sandbox does not allow lrv to automatically open the url in the browser.
 
 ## Version control
 
+- When a `.jj` directory exists in the root of the source tree use `jj` for version control instead of git.
+- I prefer to modify version control myself so unless I have specifically asked you never commit or squash the changes you have made into the repository.
+- When modifying existing changes in jj prefer to `jj new <change>` instead of `jj edit <change>` so I can inspect the changes you make before we squash them.
 - Revert by committing a revert on top of existing history. Never `git reset` or `jj abandon`.
 
 ## Rust
