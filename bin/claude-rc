@@ -1,3 +1,8 @@
 #! /bin/bash
 
-exec claude-wrapper remote-control --no-create-session-in-dir --spawn worktree
+exec claude-wrapper remote-control \
+  --no-create-session-in-dir \
+  --spawn worktree \
+  --remote-control-session-name-prefix $(hostname -s) \
+  --permission-mode auto \
+  $@
