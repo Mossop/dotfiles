@@ -1,1 +1,1 @@
-. {{ .chezmoi.targetFile | dir }}/startup.sh
+. "{{ .chezmoi.sourceDir | dir }}/shared/maybe_update.sh" "{{ .chezmoi.sourceDir | dir }}" "{{ .chezmoi.targetFile | dir }}/startup.sh"

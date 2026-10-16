@@ -1,3 +1,5 @@
 #! /bin/bash
 
-git -C "{{ .chezmoi.sourceDir | dir }}" remote set-url origin 'git@github.com:Mossop/dotfiles.git'
+# Fetch over https so updates work without a key; push over ssh.
+git -C "{{ .chezmoi.sourceDir | dir }}" remote set-url origin 'https://github.com/Mossop/dotfiles.git'
+git -C "{{ .chezmoi.sourceDir | dir }}" remote set-url --push origin 'git@github.com:Mossop/dotfiles.git'
