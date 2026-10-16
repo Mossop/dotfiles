@@ -1,0 +1,16 @@
+#! /bin/bash
+
+if ! command -v mise 1>/dev/null 2>&1; then
+  curl -fsSL https://mise.run | sh
+fi
+
+{{- if eq .chezmoi.os "darwin" }}
+if ! command -v brew 1>/dev/null 2>&1; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+brew install --quiet git joe gnu-which findutils gnu-sed gnu-tar grep coreutils wget curl
+{{- else if eq .chezmoi.os "windows" }}
+{{- else }}
+{{- end }}

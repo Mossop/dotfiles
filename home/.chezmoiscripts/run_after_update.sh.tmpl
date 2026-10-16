@@ -1,0 +1,7 @@
+#! /bin/bash
+
+if command -v mise 1>/dev/null 2>&1; then
+  mise self-update -y -q
+  mise up -q
+  mise prune -y -q
+fi

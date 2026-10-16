@@ -1,5 +1,13 @@
+{{- /* Preserve moz-phab's own record of when it last checked for updates. */ -}}
+{{- $lastCheck := "" -}}
+{{- $existing := joinPath .chezmoi.homeDir ".moz-phab-config" -}}
+{{- if stat $existing -}}
+{{-   $lastCheck = include $existing | fromIni | dig "updater" "self_last_check" "" -}}
+{{- end -}}
 [ui]
 no_ansi = False
+hyperlinks = True
+open_browser = True
 
 [vcs]
 safe_mode = False
@@ -15,6 +23,9 @@ command_path = hg
 auto_submit = True
 always_blocking = True
 warn_untracked = True
+ai_review = False
+review_queue_reminder_frequency = 0
+review_queue_reminder_include_groups = True
 
 [patch]
 apply_to = here
@@ -27,7 +38,9 @@ create_commit = True
 no_commit = True
 
 [updater]
-self_last_check = 1738149586
+{{- if $lastCheck }}
+self_last_check = {{ $lastCheck }}
+{{- end }}
 self_auto_update = False
 get_pre_releases = False
 arc_last_check = 0

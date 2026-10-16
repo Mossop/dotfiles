@@ -1,0 +1,10 @@
+#! /bin/bash
+
+. "{{ .chezmoi.sourceDir | dir }}/shared/functions.sh"
+
+strip "{{ .chezmoi.homeDir }}/.profile" "# dotfiles"
+strip "{{ .chezmoi.homeDir }}/.ssh/config" "shared\\/ssh\\/ssh_config"
+
+if command -v brew 1>/dev/null 2>&1; then
+  brew remove --quiet mise
+fi

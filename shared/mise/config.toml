@@ -11,6 +11,3 @@ binstall = true
 "cargo:jj-cli" = "latest"
 "cargo-binstall" = "latest"
 "cargo:starship" = "latest"
-
-[shell_alias]
-claude = "$DOTFILES/bin/claude-wrapper"
