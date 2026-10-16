@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 if [[ -x "${1:-}" ]]; then
   export CLAUDE_BINARY="$1"
@@ -9,8 +9,8 @@ fi
 
 if command -v mise 1>/dev/null 2>&1; then
   CLAUDE=`mise exec -- bash -c 'echo ${CLAUDE_WRAPPER:-$CLAUDE_BINARY}'`
-  exec mise exec -- $CLAUDE $@
+  exec mise exec -- $CLAUDE "$@"
 else
   CLAUDE=${CLAUDE_WRAPPER:-$CLAUDE_BINARY}
-  exec $CLAUDE $@
+  exec $CLAUDE "$@"
 fi

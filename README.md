@@ -1,4 +1,4 @@
-There are my personal [chezmoi](https://www.chezmoi.io/) [dotfiles](https://dotfiles.github.io/).
+These are my personal [chezmoi](https://www.chezmoi.io/) [dotfiles](https://dotfiles.github.io/).
 
 ## Installing
 

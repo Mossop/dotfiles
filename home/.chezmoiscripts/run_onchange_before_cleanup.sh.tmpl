@@ -6,10 +6,12 @@ strip "{{ .chezmoi.homeDir }}/.profile" "# dotfiles"
 strip "{{ .chezmoi.homeDir }}/.ssh/config" "shared\\/ssh\\/ssh_config"
 
 {{- if eq .chezmoi.os "darwin" }}
-if command -v brew 1>/dev/null 2>&1; then
+if command -v brew 1>/dev/null 2>&1 && brew list --formula mise 1>/dev/null 2>&1; then
   brew remove --quiet mise
 fi
 
 {{- else if eq .chezmoi.os "linux" }}
-  sudo apt remove mise
+if dpkg -s mise 1>/dev/null 2>&1; then
+  sudo apt remove -y mise
+fi
 {{- end }}

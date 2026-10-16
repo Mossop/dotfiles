@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# A freshly installed mise lives here and isn't on PATH until a new shell starts.
+PATH="$HOME/.local/bin:$PATH"
+
 if command -v mise 1>/dev/null 2>&1; then
   mise self-update -y -q
   mise up -q

@@ -9,7 +9,7 @@
 #       "hooks": [
 #         {
 #           "type": "command",
-#           "command": "$HOME/dotfiles/bin/claude-notify <webhook url>",
+#           "command": "$HOME/.local/share/chezmoi/bin/claude-notify <webhook url>",
 #           "async": true,
 #           "timeout": 300
 #         }
@@ -22,7 +22,7 @@
 #       "hooks": [
 #         {
 #           "type": "command",
-#           "command": "$HOME/dotfiles/bin/claude-notify <webhook url>",
+#           "command": "$HOME/.local/share/chezmoi/bin/claude-notify <webhook url>",
 #           "async": true,
 #           "timeout": 300
 #         }
@@ -33,7 +33,7 @@
 #       "hooks": [
 #         {
 #           "type": "command",
-#           "command": "$HOME/dotfiles/bin/claude-notify <webhook url>",
+#           "command": "$HOME/.local/share/chezmoi/bin/claude-notify <webhook url>",
 #           "async": true,
 #           "timeout": 300
 #         }
@@ -55,15 +55,22 @@ SESSION_ID=$(echo "$INPUT" | jq -r '.session_id')
 PROJECT=$(echo "$INPUT" | jq -r '.cwd' | xargs basename)
 
 send_webhook() {
-  curl -q -X POST "$WEBHOOK" \
+  # Build the payload with jq so quotes in the message can't break the JSON.
+  PAYLOAD=$(jq -n \
+    --arg session_id "$SESSION_ID" \
+    --arg project "$PROJECT" \
+    --arg notification_type "$NOTIFICATION_TYPE" \
+    --arg hook_event "$HOOK_EVENT" \
+    --arg message "$1" \
+    '$ARGS.named')
+  curl -s -X POST "$WEBHOOK" \
     -H "Content-Type: application/json" \
-    -d "{
-      \"session_id\": \"$SESSION_ID\",
-      \"project\": \"$PROJECT\",
-      \"notification_type\": \"$NOTIFICATION_TYPE\",
-      \"hook_event\": \"$HOOK_EVENT\",
-      \"message\": \"$1\"
-    }"
+    -d "$PAYLOAD"
+}
+
+# Modification time in seconds since the epoch; GNU stat first, then BSD stat.
+mtime() {
+  stat -c "%Y" "$1" 2>/dev/null || stat -f "%m" "$1" 2>/dev/null
 }
 
 if [[ "$HOOK_EVENT" == "PostToolUse" || "$HOOK_EVENT" == "PostToolUseFailure" || "$HOOK_EVENT" == "SessionEnd" ]]; then
@@ -83,9 +90,9 @@ else
   sleep $SLEEP_DURATION
 
   # Check if transcript was modified since we started
-  LAST_MODIFIED=$(stat -c "%Y" "$TRANSCRIPT_PATH" 2>/dev/null)
+  LAST_MODIFIED=$(mtime "$TRANSCRIPT_PATH")
 
-  if [ "$LAST_MODIFIED" -le "$START_TIME" ]; then
+  if [ "${LAST_MODIFIED:-0}" -le "$START_TIME" ]; then
     # No new activity - send notification
     MESSAGE=$(echo "$INPUT" | jq -r '.message // "Claude finished responding"')
     send_webhook "$MESSAGE"

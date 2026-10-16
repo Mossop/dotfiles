@@ -5,7 +5,7 @@
 INIT_MARKER="# dotfiles"
 
 strip_file() {
-  strip "{{ .chezmoi.homeDir }}/.$1" $2
+  strip "{{ .chezmoi.homeDir }}/.$1" "$2"
 }
 
 add_init() {
