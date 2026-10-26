@@ -1,10 +1,3 @@
-{{- if and (hasKey . "mozilla") .mozilla -}}
-{{- /* Preserve moz-phab's own record of when it last checked for updates. */ -}}
-{{- $lastCheck := "" -}}
-{{- $existing := joinPath .chezmoi.homeDir ".moz-phab-config" -}}
-{{- if stat $existing -}}
-{{-   $lastCheck = include $existing | fromIni | dig "updater" "self_last_check" "" -}}
-{{- end -}}
 [ui]
 no_ansi = False
 hyperlinks = True
@@ -15,7 +8,7 @@ safe_mode = False
 
 [git]
 remote = central
-command_path = 
+command_path =
 
 [hg]
 command_path = hg
@@ -39,9 +32,10 @@ create_commit = True
 no_commit = True
 
 [updater]
-{{- if $lastCheck }}
-self_last_check = {{ $lastCheck }}
-{{- end }}
+{%- set path = [env.HOME, ".moz-phab-config"] | join_path %}
+{%- if path is file %}
+{{ exec(command='cat ' ~ path ~ ' | grep "self_last_check ="') }}
+{%- endif %}
 self_auto_update = False
 get_pre_releases = False
 arc_last_check = 0
@@ -51,4 +45,3 @@ report_to_sentry = True
 
 [telemetry]
 enabled = True
-{{- end }}

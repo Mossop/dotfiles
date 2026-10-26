@@ -5,9 +5,3 @@ status.show_tools = true
 
 [settings.cargo]
 binstall = true
-
-[tools]
-"uv" = "latest"
-"cargo:jj-cli" = "latest"
-"cargo-binstall" = "latest"
-"cargo:starship" = "latest"

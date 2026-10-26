@@ -1,0 +1,31 @@
+#! /bin/bash
+
+set -e
+
+if [ -z "$DOTFILES" ]; then
+  echo "Dotfiles environment not initialized."
+  exit 1
+fi
+
+if [ ! -f "$DOTFILES/shared/mise/config.local.toml" ]; then
+  GROUP_ID=''
+  if [ -d "$HOME/mozilla-source" ]; then
+    GROUP_ID='"mozilla"'
+  fi
+
+  echo "[bootstrap]
+dotfile_groups = [$GROUP_ID]
+" > $DOTFILES/shared/mise/config.local.toml
+fi
+
+mise self-update -y -q
+
+OLD_HEAD=$(git -C "$DOTFILES" rev-parse HEAD)
+git -C "$DOTFILES" pull origin main -q --rebase --autostash
+git -C "$DOTFILES" branch -q --set-upstream-to=origin/main main
+
+if [ "$(git -C "$DOTFILES" rev-parse HEAD)" == "$OLD_HEAD" ]; then
+  exit 0
+fi
+
+mise bootstrap --update --prune-dotfiles --yes

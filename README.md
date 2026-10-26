@@ -1,7 +1,7 @@
-These are my personal [chezmoi](https://www.chezmoi.io/) [dotfiles](https://dotfiles.github.io/).
+These are my personal [dotfiles](https://dotfiles.github.io/).
 
 ## Installing
 
 ```
-sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply Mossop
+curl -fsSL https://raw.githubusercontent.com/Mossop/dotfiles/refs/heads/main/init.sh | sh
 ```

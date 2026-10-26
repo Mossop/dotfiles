@@ -1,0 +1,24 @@
+{
+  "hooks": {
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "command": "{{ vars.DOTFILES }}/bin/claude-ws-create",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "WorktreeRemove": [
+      {
+        "hooks": [
+          {
+            "command": "{{ vars.DOTFILES }}/bin/claude-ws-remove",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  }
+}

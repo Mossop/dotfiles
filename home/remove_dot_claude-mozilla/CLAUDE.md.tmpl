@@ -1,3 +1,0 @@
-{{- if and (hasKey . "mozilla") .mozilla -}}
-{{ include (joinPath (.chezmoi.sourceDir | dir) "shared" "claude" "CLAUDE.md") }}
-{{ end }}

@@ -1,0 +1,25 @@
+#! /bin/bash
+
+# Only in interactive shells, so scp/ssh commands and scripts aren't disturbed.
+if [[ $- == *i* ]]; then
+  SOURCE_DIR="$1"
+  LAST_UPDATE_FILE="$SOURCE_DIR/.last_update"
+  UPDATE_INTERVAL=$((7 * 24 * 60 * 60))
+
+  # startup.sh hasn't run yet so the user bin directories may not be on PATH.
+  MISE=$(PATH="$HOME/.local/bin:$PATH" which mise)
+
+  NOW=$(date +%s)
+  LAST_UPDATE=$(cat "$LAST_UPDATE_FILE" 2>/dev/null)
+
+  if [[ -z "$LAST_UPDATE" ]]; then
+    echo "$NOW" > "$LAST_UPDATE_FILE"
+  elif [[ $((NOW - LAST_UPDATE)) -gt $UPDATE_INTERVAL ]]; then
+    echo "$NOW" > "$LAST_UPDATE_FILE"
+    "$MISE" run "dotfiles:update"
+  fi
+
+  unset SOURCE_DIR LAST_UPDATE_FILE UPDATE_INTERVAL MISE NOW LAST_UPDATE
+fi
+
+. "$2"

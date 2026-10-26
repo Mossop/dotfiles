@@ -1,0 +1,4 @@
+[tools]
+"cargo-binstall" = "latest"
+"cargo:jj-cli" = "latest"
+"cargo:starship" = "latest"

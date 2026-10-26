@@ -1,0 +1,123 @@
+DOTFILES=$(mise vars DOTFILES)
+OS=$(mise vars OS)
+
+. "$DOTFILES/shared/functions.sh"
+
+add_path() {
+  if [ -d "$1" ]; then
+    PATH="$1:$PATH"
+  fi
+}
+
+maybe_source "$HOME/.cargo/env"
+
+if command -v dircolors 1>/dev/null 2>&1; then
+  eval $(dircolors "$DOTFILES/shared/dircolors")
+fi
+alias ls="ls --color"
+
+export LESS="FRSX"
+unset MAILCHECK
+
+export JJ_CONFIG="$DOTFILES/shared/jj"
+export MISE_CONFIG_DIR="$DOTFILES/shared/mise"
+
+if [ "$OS" == "linux" ]; then
+  if [ -n "$VSCODE_GIT_EDITOR_NODE" ]; then
+    add_path "$(dirname ${VSCODE_GIT_EDITOR_NODE})/bin/remote-cli"
+  fi
+elif [ "$OS" == "windows" ]; then
+  export PATH=$(echo $PATH | sed -e s~/Git/cmd~/Git/mingw64/bin~g)
+
+  if [ -f "/c/mozilla-build/msys2/usr/bin/ssh.exe" ]; then
+    export GIT_SSH="C:\\mozilla-build\\msys2\\usr\\bin\\ssh.exe"
+  fi
+
+  # Broken on windows for now.
+  VSCODE_SHELL_INTEGRATION=1
+else
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  else
+    export HOMEBREW_PREFIX="/opt/homebrew"
+    add_path "${HOMEBREW_PREFIX}/bin"
+    add_path "${HOMEBREW_PREFIX}/sbin"
+  fi
+
+  for PACKAGE in gnu-which findutils gnu-sed make gnu-tar grep coreutils
+  do
+    add_path "${HOMEBREW_PREFIX}/opt/${PACKAGE}/libexec/gnubin"
+  done
+  for PACKAGE in gnu-getopt util-linux
+  do
+    add_path "${HOMEBREW_PREFIX}/opt/${PACKAGE}/bin"
+  done
+
+  add_path "${HOMEBREW_PREFIX}/opt/curl/bin"
+
+  if [ -d "${HOMEBREW_PREFIX}/share/android-commandlinetools" ]; then
+    export ANDROID_HOME="${HOMEBREW_PREFIX}/share/android-commandlinetools"
+    add_path "${ANDROID_HOME}/platform-tools"
+  fi
+
+  add_path "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
+  add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+  export BASH_SILENCE_DEPRECATION_WARNING=1
+
+  if [[ $- == *i* ]]; then
+    maybe_source "/opt/homebrew/etc/profile.d/bash_completion.sh"
+  fi
+
+  if [ -d "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password" ]; then
+    export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  fi
+fi
+
+add_path "$DOTFILES/bin"
+add_path "$DOTFILES/platforms/$OS/bin"
+add_path "$HOME/.local/bin"
+add_path "$HOME/bin"
+
+if command -v code 1>/dev/null 2>&1; then
+  export VSCODE="code"
+  export EDITOR="code -w"
+elif command -v code.cmd 1>/dev/null 2>&1; then
+  export VSCODE="code.cmd"
+  alias code=$VSCODE
+  export EDITOR="$VSCODE -w"
+elif command -v joe 1>/dev/null 2>&1; then
+  export EDITOR=joe
+fi
+
+export VISUAL="$EDITOR"
+
+if [[ $- == *i* ]]; then
+  eval "$(mise activate bash)"
+  eval "$(mise completion bash)"
+else
+  eval "$(mise activate bash --shims)"
+fi
+
+if [[ $- == *i* ]]; then
+  if command -v starship 1>/dev/null 2>&1; then
+    export STARSHIP_CONFIG=$DOTFILES/shared/starship.toml
+    eval "$(starship init bash)"
+  fi
+
+  if [ "$TERM_PROGRAM" == "vscode" ]; then
+    if [ -z "$VSCODE_SHELL_INTEGRATION" ]; then
+      . "$($VSCODE --locate-shell-integration-path bash)"
+    fi
+  fi
+
+  if command -v jj 1>/dev/null 2>&1; then
+    source <(jj util completion bash)
+  fi
+
+  if command -v claude 1>/dev/null 2>&1; then
+    alias claude="$DOTFILES/bin/claude-wrapper"
+  fi
+fi
+
+PATH=$(echo $PATH | tr ':' '\n' | awk '!seen[$0]++' - | tr '\n' ':' | sed -e s/.$//)

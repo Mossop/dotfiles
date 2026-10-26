@@ -1,8 +1,0 @@
-#! /bin/bash
-
-. "{{ .chezmoi.sourceDir | dir }}/shared/functions.sh"
-
-CONFIG_FILE="{{ .chezmoi.homeDir }}/.ssh/config"
-
-strip "$CONFIG_FILE" "# dotfiles"
-prepend "$CONFIG_FILE" "Include \"{{ .chezmoi.homeDir }}/.ssh/shared.conf\" # dotfiles"

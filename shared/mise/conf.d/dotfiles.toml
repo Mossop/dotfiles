@@ -1,0 +1,23 @@
+[dotfiles]
+"~/.bashrc/init" = { source = "../../../home/.bashrc", template = "tera" }
+"~/.bash_profile/init" = { source = "../../../home/.bash_profile", template = "tera" }
+"~/.ssh/config/shared" = { block = "Include \"conf.d/*.conf\"" }
+
+"~/.claude/CLAUDE.md" = { mode = "copy" }
+"~/.claude/settings.json/shared" = { merge = true, template = "tera" }
+"~/.config/git/config" = { mode = "copy" }
+"~/.config/git/ignore" = { mode = "copy" }
+"~/.gdbinit" = { mode = "copy" }
+"~/.hgrc" = { mode = "template" }
+"~/.inputrc" = { mode = "copy" }
+"~/.ssh/conf.d/shared.conf" = { mode = "template" }
+"~/.tmux.conf" = { mode = "copy" }
+
+[dotfile_groups.mozilla]
+root = "../mozilla"
+mode = "copy"
+
+[dotfile_groups.mozilla.entries]
+"~/.claude-mozilla/CLAUDE.md" = { mode = "copy", source = "../home/.claude/CLAUDE.md" }
+"~/.moz-phab-config" = { mode = "template" }
+"~/.ssh/conf.d/mozilla.conf" = { mode = "template" }
