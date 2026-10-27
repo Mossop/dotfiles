@@ -1,0 +1,5 @@
+[settings]
+windows_default_inline_shell_args = "C:\\mozilla-build\\msys2\\usr\\bin\\bash.exe -c"
+
+[bootstrap.packages]
+"winget:jdx.mise" = { state = "absent" }

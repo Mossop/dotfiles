@@ -14,15 +14,13 @@ export MISE_SELF_UPDATE_MINIMUM_RELEASE_AGE="1h"
 
 if ! command -v mise 1>/dev/null 2>&1; then
   if [ "$OS" == "Windows_NT" ]; then
-    winget install jdx.mise
-    export MISE="$HOME/AppData/Local/Microsoft/WinGet/Links/mise"
+    powershell.exe -NoProfile -Command "irm https://mise.run/powershell | iex"
   else
     curl -fsSL https://mise.run | sh
-    export MISE="$HOME/.local/bin/mise"
   fi
+  export MISE="$HOME/.local/bin/mise"
 else
   export MISE="$(which mise)"
-  mise self-update -y
 fi
 
 if [ ! -d "$DOTFILES" ]; then

@@ -1,3 +1,5 @@
+[core]
+  autocrlf = false
 [color]
   ui = true
 [user]
