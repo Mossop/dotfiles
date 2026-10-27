@@ -1,0 +1,7 @@
+[mach_telemetry]
+is_enabled = true
+is_set_up = true
+is_employee = true
+
+[runprefs]
+devtools.debugger.prompt-connection=false

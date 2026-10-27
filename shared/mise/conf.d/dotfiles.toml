@@ -20,4 +20,5 @@ mode = "copy"
 [dotfile_groups.mozilla.entries]
 "~/.claude-mozilla/CLAUDE.md" = { mode = "copy", source = "../home/.claude/CLAUDE.md" }
 "~/.moz-phab-config" = { mode = "template" }
+"~/.mozbuild/machrc" = { mode = "copy" }
 "~/.ssh/conf.d/mozilla.conf" = { mode = "template" }
