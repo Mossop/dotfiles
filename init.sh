@@ -32,4 +32,4 @@ fi
 
 export MISE_CONFIG_DIR="$DOTFILES/shared/mise"
 export MISE_DOTFILES_ROOT="$DOTFILES/home"
-exec "$MISE" run dotfiles:update
+exec "$MISE" --cd $HOME run dotfiles:update
