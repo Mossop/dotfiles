@@ -1,0 +1,21 @@
+[env]
+HOMEBREW_PREFIX = "{{ system_brew_prefix }}"
+HOMEBREW_CELLAR = "$HOMEBREW_PREFIX/Cellar"
+HOMEBREW_REPOSITORY = "$HOMEBREW_PREFIX"
+BASH_SILENCE_DEPRECATION_WARNING = "1"
+
+[env._.path]
+paths = [
+  "$HOMEBREW_PREFIX/opt/gnu-which/libexec/gnubin",
+  "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin",
+  "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin",
+  "$HOMEBREW_PREFIX/opt/make/libexec/gnubin",
+  "$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin",
+  "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin",
+  "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin",
+  "$HOMEBREW_PREFIX/opt/gnu-getopt/bin",
+  "$HOMEBREW_PREFIX/opt/util-linux/bin",
+  "$HOMEBREW_PREFIX/opt/curl/bin",
+  "$HOMEBREW_PREFIX/bin",
+  "$HOMEBREW_PREFIX/sbin",
+]

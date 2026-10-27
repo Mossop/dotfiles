@@ -10,23 +10,26 @@ if ! command -v git 1>/dev/null 2>&1; then
   exit 1
 fi
 
+export MISE_SELF_UPDATE_MINIMUM_RELEASE_AGE="1h"
+
 if ! command -v mise 1>/dev/null 2>&1; then
   if [ "$OS" == "Windows_NT" ]; then
     winget install jdx.mise
-    export PATH="$HOME/AppData/Local/Microsoft/WinGet/Links:$PATH"
+    export MISE="$HOME/AppData/Local/Microsoft/WinGet/Links/mise"
   else
     curl -fsSL https://mise.run | sh
-    export PATH="$HOME/.local/bin/mise:$PATH"
+    export MISE="$HOME/.local/bin/mise"
   fi
+else
+  export MISE="$(which mise)"
+  mise self-update -y
 fi
 
 if [ ! -d "$DOTFILES" ]; then
-  mkdir $DOTFILES
-  git -C "$DOTFILES" init -b main -q
-  git -C "$DOTFILES" remote add origin "https://github.com/$DOTSOURCE.git"
+  git clone -q https://github.com/$DOTSOURCE.git "$DOTFILES"
   git -C "$DOTFILES" remote set-url --push origin "git@github.com:$DOTSOURCE.git"
 fi
 
 export MISE_CONFIG_DIR="$DOTFILES/shared/mise"
 export MISE_DOTFILES_ROOT="$DOTFILES/home"
-exec mise run dotfiles:update
+exec "$MISE" run dotfiles:update

@@ -5,3 +5,21 @@ status.show_tools = true
 
 [settings.cargo]
 binstall = true
+
+[env]
+LESS = "FRSX"
+JJ_CONFIG = "{{ vars.DOTFILES }}/shared/jj"
+STARSHIP_CONFIG = "{{ vars.DOTFILES }}/shared/starship.toml"
+
+[env._.path]
+tools = true
+paths = [
+  "$HOME/bin",
+  "$HOME/.cargo/bin",
+  "$HOME/.local/bin",
+  "{{ vars.DOTFILES }}/bin",
+  "{{ vars.DOTFILES }}/platforms/{{ vars.OS }}/bin",
+]
+
+[shell_alias]
+ls = "ls --color"
