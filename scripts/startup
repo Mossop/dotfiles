@@ -15,11 +15,7 @@ fi
 
 unset MAILCHECK
 
-if [ "$OS" == "linux" ]; then
-  if [ -n "$VSCODE_GIT_EDITOR_NODE" ]; then
-    add_path "$(dirname ${VSCODE_GIT_EDITOR_NODE})/bin/remote-cli"
-  fi
-elif [ "$OS" == "windows" ]; then
+if [ "$OS" == "windows" ]; then
   export PATH=$(echo $PATH | sed -e s~/Git/cmd~/Git/mingw64/bin~g)
 
   if [ -f "/c/mozilla-build/msys2/usr/bin/ssh.exe" ]; then
