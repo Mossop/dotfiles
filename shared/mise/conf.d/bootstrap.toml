@@ -17,13 +17,17 @@ run = "{{ vars.DOTFILES }}/scripts/dotfiles-update"
 pre-dotfiles = "{{ vars.DOTFILES }}/scripts/pre-dotfiles"
 
 [bootstrap.packages]
-"brew:git" = "latest"
-"brew:joe" = "latest"
-"brew:gnu-which" = "latest"
-"brew:findutils" = "latest"
-"brew:gnu-sed" = "latest"
-"brew:gnu-tar" = "latest"
-"brew:grep" = "latest"
-"brew:coreutils" = "latest"
-"brew:wget" = "latest"
-"brew:curl" = "latest"
+"brew:git" = { os = "macos" }
+"brew:joe" = { os = "macos" }
+"brew:gnu-which" = { os = "macos" }
+"brew:findutils" = { os = "macos" }
+"brew:gnu-sed" = { os = "macos" }
+"brew:gnu-tar" = { os = "macos" }
+"brew:grep" = { os = "macos" }
+"brew:coreutils" = { os = "macos" }
+"brew:wget" = { os = "macos" }
+"brew:curl" = { os = "macos" }
+"brew:mise" = { os = "macos", state = "absent" }
+
+"apt:joe" = { os = "linux" }
+"apt:mise" = { os = "linux", state = "absent" }
