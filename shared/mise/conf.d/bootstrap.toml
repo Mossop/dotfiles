@@ -2,17 +2,14 @@
 DOTFILES = "{{ config_source | dirname | dirname | dirname | dirname }}"
 OS = '{{ os(macos="darwin") }}'
 
-[env]
-MISE_DOTFILES_ROOT = "{{ vars.DOTFILES }}/home"
-
 [settings.dotfiles]
+root = "{{ config_source | dirname | dirname | dirname | dirname }}/home"
 default_mode = "copy"
 
 [settings.write_targets]
 dotfiles = "{{ config_source | dirname }}/conf.d/dotfiles.toml"
 
 [tasks."dotfiles:update"]
-env = { DOTFILES = "$HOME/.dotfiles" }
 description = "Syncs dotfiles with the remote repository and bootstraps"
 run = "{{ vars.DOTFILES }}/scripts/dotfiles-update"
 

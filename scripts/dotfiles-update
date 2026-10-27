@@ -2,10 +2,7 @@
 
 set -e
 
-if [ -z "$DOTFILES" ]; then
-  echo "Dotfiles environment not initialized."
-  exit 1
-fi
+DOTFILES=$(mise vars DOTFILES)
 
 if [ ! -f "$DOTFILES/shared/mise/config.local.toml" ]; then
   GROUP_ID=''
