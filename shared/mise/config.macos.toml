@@ -19,3 +19,16 @@ paths = [
   "$HOMEBREW_PREFIX/bin",
   "$HOMEBREW_PREFIX/sbin",
 ]
+
+[bootstrap.packages]
+"brew:git" = "latest"
+"brew:joe" = "latest"
+"brew:gnu-which" = "latest"
+"brew:findutils" = "latest"
+"brew:gnu-sed" = "latest"
+"brew:gnu-tar" = "latest"
+"brew:grep" = "latest"
+"brew:coreutils" = "latest"
+"brew:wget" = "latest"
+"brew:curl" = "latest"
+"brew:mise" = { state = "absent" }
