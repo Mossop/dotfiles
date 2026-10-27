@@ -8,7 +8,7 @@ safe_mode = False
 
 [git]
 remote = central
-command_path =
+command_path = 
 
 [hg]
 command_path = hg
@@ -34,7 +34,7 @@ no_commit = True
 [updater]
 {%- set path = [env.HOME, ".moz-phab-config"] | join_path %}
 {%- if path is file %}
-{{ exec(command='cat ' ~ path ~ ' | grep "self_last_check ="') }}
+{{ read_file(path=path) | regex_replace(pattern='(?s)^.*(self_last_check = \\d+).*$', rep="$1") }}
 {%- endif %}
 self_auto_update = False
 get_pre_releases = False
