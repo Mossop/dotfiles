@@ -1,7 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = '''$username[@](bold green)$hostname${custom.mozbuild}
-${custom.vcs}$directory$character'''
+$vcs$directory$character'''
 
 [hostname]
 ssh_only = false
@@ -18,21 +18,29 @@ style_user = 'bold green'
 format = '[$path]($style)[$read_only]($read_only_style)'
 truncation_length = 1
 
-[git_branch]
-format = '[\[$branch(:$remote_branch)\]]($style) '
-style = 'bold yellow'
-only_attached = true
-
 [custom.mozbuild]
 description = "MozillaBuild configuration"
 command = "$BUILD_BASE/bin/prompt"
 when = '[ ! -z "$BUILD_BASE" ]'
 style = 'bold yellow'
 
-[custom.vcs]
-description = "Version control status"
-command = "$DOTFILES/bin/vcs-prompt"
-when = true
+[vcs]
+order = ["jj", "git", "hg"]
+jj_modules = "[\\[jj\\]](bold yellow) $jj_bookmark$jj_status"
+git_modules = "[\\[git\\]](bold yellow) $git_branch$git_status"
+hg_modules = "[\\[hg\\]](bold yellow) $hg_branch$hg_state"
+
+[jj_bookmark]
+format = "[$symbol$bookmark(@$remote)$diverged( \\(+$overflow_count others\\))]($style) "
+style = 'bold yellow'
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+style = 'bold yellow'
+only_attached = true
+
+[hg_branch]
+format = "[$symbol$branch(:$topic)]($style) "
 style = 'bold yellow'
 
 [character]
