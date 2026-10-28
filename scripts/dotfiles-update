@@ -20,4 +20,4 @@ MISE_SELF_UPDATE_MINIMUM_RELEASE_AGE="1h" mise self-update -y -q
 git -C "$DOTFILES" pull origin main -q --rebase --autostash
 git -C "$DOTFILES" branch -q --set-upstream-to=origin/main main
 
-mise --cd $HOME bootstrap --update --prune-dotfiles --yes
+mise --cd $HOME bootstrap --update --upgrade --prune-dotfiles --yes
