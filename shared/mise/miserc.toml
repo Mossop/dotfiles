@@ -1,1 +1,3 @@
 auto_env = true
+env_conf_d = true
+ceiling_paths = ["/Users"]
