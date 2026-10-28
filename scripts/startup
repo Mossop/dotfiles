@@ -1,14 +1,6 @@
 DOTFILES=$("$MISE" vars DOTFILES)
 OS=$("$MISE" vars OS)
 
-. "$DOTFILES/shared/functions.sh"
-
-add_path() {
-  if [ -d "$1" ]; then
-    PATH="$1:$PATH"
-  fi
-}
-
 if command -v dircolors 1>/dev/null 2>&1; then
   eval $(dircolors "$DOTFILES/shared/dircolors")
 fi
@@ -20,21 +12,25 @@ if [ "$OS" == "windows" ]; then
     export GIT_SSH="C:\\mozilla-build\\msys2\\usr\\bin\\ssh.exe"
   fi
 else
-  if [ -x "${HOMEBREW_PREFIX}/bin/brew" ]; then
-    eval "$("${HOMEBREW_PREFIX}/bin/brew" shellenv | grep -v HOMEBREW_ | grep -v " PATH")"
+  if [ -d "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password" ]; then
+    export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  fi
+fi
+
+if [ -n "$HOMEBREW_PREFIX" ]; then
+  if [ -x "$HOMEBREW_PREFIX/bin/brew" ]; then
+    eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv | grep -v HOMEBREW_ | grep -v " PATH")"
   fi
 
-  if [ -d "${HOMEBREW_PREFIX}/share/android-commandlinetools" ]; then
-    export ANDROID_HOME="${HOMEBREW_PREFIX}/share/android-commandlinetools"
-    add_path "${ANDROID_HOME}/platform-tools"
+  if [ -d "$HOMEBREW_PREFIX/share/android-commandlinetools" ]; then
+    export ANDROID_HOME="$HOMEBREW_PREFIX/share/android-commandlinetools"
+    export PATH="$ANDROID_HOME/platform-tools:$PATH"
   fi
 
   if [[ $- == *i* ]]; then
-    maybe_source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  fi
-
-  if [ -d "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password" ]; then
-    export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    if [ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]; then
+      . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    fi
   fi
 fi
 
