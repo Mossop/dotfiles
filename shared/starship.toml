@@ -1,12 +1,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = '''$username[@](bold green)$hostname${custom.mozbuild}
+format = '''$username$hostname${custom.mozbuild}
 $vcs$directory$character'''
 
 [hostname]
-ssh_only = false
+ssh_only = true
 style = 'bold green'
-format = '[$hostname$ssh_symbol]($style) '
+format = '[@$hostname$ssh_symbol]($style) '
 ssh_symbol = ' 🌐'
 
 [username]
