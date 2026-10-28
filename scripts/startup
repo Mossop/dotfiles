@@ -20,8 +20,8 @@ if [ "$OS" == "windows" ]; then
     export GIT_SSH="C:\\mozilla-build\\msys2\\usr\\bin\\ssh.exe"
   fi
 else
-  if [ -x /opt/homebrew/bin/brew ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv | grep -v HOMEBREW_ | grep -v " PATH")"
+  if [ -x "${HOMEBREW_PREFIX}/bin/brew" ]; then
+    eval "$("${HOMEBREW_PREFIX}/bin/brew" shellenv | grep -v HOMEBREW_ | grep -v " PATH")"
   fi
 
   if [ -d "${HOMEBREW_PREFIX}/share/android-commandlinetools" ]; then
@@ -30,7 +30,7 @@ else
   fi
 
   if [[ $- == *i* ]]; then
-    maybe_source "/opt/homebrew/etc/profile.d/bash_completion.sh"
+    maybe_source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
   fi
 
   if [ -d "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password" ]; then
