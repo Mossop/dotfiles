@@ -12,7 +12,6 @@ JJ_CONFIG = "{{ vars.DOTFILES }}/shared/jj"
 STARSHIP_CONFIG = "{{ vars.DOTFILES }}/shared/starship.toml"
 
 [env._.path]
-tools = true
 paths = [
   "$HOME/bin",
   "$HOME/.cargo/bin",

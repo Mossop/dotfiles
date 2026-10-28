@@ -52,22 +52,20 @@ fi
 export VISUAL="$EDITOR"
 
 if [[ $- == *i* ]]; then
-  eval "$("$MISE" activate bash)"
-  eval "$("$MISE" completion bash)"
-else
-  eval "$("$MISE" activate bash --shims)"
-fi
-
-if [[ $- == *i* ]]; then
-  eval "$(starship init bash)"
-
   if [ "$TERM_PROGRAM" == "vscode" ]; then
     . "$($VSCODE --locate-shell-integration-path bash)"
   fi
+
+  eval "$("$MISE" activate bash)"
+  eval "$("$MISE" completion bash)"
+
+  eval "$(starship init bash)"
 
   source <(jj util completion bash)
 
   if command -v claude 1>/dev/null 2>&1; then
     alias claude="$DOTFILES/bin/claude-wrapper"
   fi
+else
+  eval "$("$MISE" activate bash --shims)"
 fi
