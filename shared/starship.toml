@@ -23,6 +23,7 @@ description = "MozillaBuild configuration"
 command = "$BUILD_BASE/bin/prompt"
 when = '[ ! -z "$BUILD_BASE" ]'
 style = 'bold yellow'
+format = '[$symbol( $output)]($style)'
 
 [vcs]
 order = ["jj", "git", "hg"]
