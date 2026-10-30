@@ -1,0 +1,3 @@
+[env]
+CLAUDE_CONFIG_DIR = "/Users/dave/.claude-mozilla"
+ANTHROPIC_MODEL = "opus"
