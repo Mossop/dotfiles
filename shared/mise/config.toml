@@ -12,12 +12,13 @@ JJ_CONFIG = "{{ vars.DOTFILES }}/shared/jj"
 STARSHIP_CONFIG = "{{ vars.DOTFILES }}/shared/starship.toml"
 
 [env._.path]
+position = "append"
 paths = [
   "$HOME/bin",
   "$HOME/.cargo/bin",
   "$HOME/.local/bin",
-  "{{ vars.DOTFILES }}/bin",
   "{{ vars.DOTFILES }}/platforms/{{ vars.OS }}/bin",
+  "{{ vars.DOTFILES }}/bin",
 ]
 
 [shell_alias]

@@ -5,6 +5,7 @@ HOMEBREW_REPOSITORY = "$HOMEBREW_PREFIX"
 BASH_SILENCE_DEPRECATION_WARNING = "1"
 
 [env._.path]
+position = "append"
 paths = [
   "$HOMEBREW_PREFIX/opt/gnu-which/libexec/gnubin",
   "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin",
